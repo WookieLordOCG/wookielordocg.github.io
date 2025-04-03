@@ -59,42 +59,30 @@
       margin-bottom: 3em;
     }
 
-    .intro-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    .intro {
       text-align: center;
     }
 
-    .intro-wrapper img {
+    .intro img {
       width: 200px;
       border-radius: 100px;
-      margin-bottom: 1em;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 8px #000;
+      margin: auto;
     }
 
-    ul {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    li {
-      margin-bottom: 0.5em;
-    }
-
-    .project-gallery, .software-list {
+    .project-gallery {
       display: flex;
       flex-wrap: wrap;
       gap: 1.5em;
       justify-content: center;
     }
 
-    .project-gallery a, .software-list img {
+    .project-gallery a {
       flex: 1 1 300px;
       max-width: 400px;
     }
 
-    .project-gallery img, .software-list img {
+    .project-gallery img {
       border-radius: 8px;
       box-shadow: 0 0 12px #000;
       transition: transform 0.3s ease;
@@ -104,22 +92,27 @@
       transform: scale(1.03);
     }
 
-    .software-list img {
-      width: 100px;
-      height: auto;
+    .software-icons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1em;
+    }
+
+    .software-icons img {
+      height: 60px;
+      background-color: #222;
+      padding: 10px;
+      border-radius: 8px;
     }
 
     @media (max-width: 600px) {
-      .intro-wrapper img {
-        width: 140px;
+      .intro img {
+        width: 150px;
       }
 
-      .project-gallery a {
-        flex: 1 1 100%;
-      }
-
-      .software-list img {
-        width: 80px;
+      .software-icons img {
+        height: 48px;
       }
     }
   </style>
@@ -135,20 +128,21 @@
 
     <!-- ✅ PRÉSENTATION -->
     <section class="section intro">
-      <div class="intro-wrapper">
-        <img src="portrait.png" alt="Portrait de Nico Krash">
-        <h1>Bienvenue sur le portfolio de Nico Krash</h1>
-        <p>Je suis <strong>Nicolas Krasnoholowy</strong>, artiste visuel 2D/3D passionné par la création d'univers immersifs, la narration visuelle et le développement de projets interactifs. J’ai étudié le design graphique et me suis spécialisé en conception d’univers visuels, modélisation, animation et narration visuelle. Je travaille principalement avec Unreal Engine pour créer des projets stylisés ou réalistes, et j’aime donner vie à des ambiances fortes et marquantes.</p>
-      </div>
+      <img src="portrait.png" alt="Portrait de Nico Krash">
+      <h1>Bienvenue sur le portfolio de Nico Krash</h1>
+      <p>
+        Je suis <strong>Nicolas Krasnoholowy</strong>, artiste visuel 2D/3D passionné par la création d'univers immersifs, la narration visuelle et le développement de projets interactifs. Diplômé en design graphique et spécialisé dans les outils 3D, je développe depuis plusieurs années des environnements, des personnages et des prototypes ludiques avec Unreal Engine. Mon parcours m’a amené à explorer aussi bien des univers stylisés que réalistes, avec toujours le souci du détail et de la narration visuelle. Mon objectif : créer des expériences mémorables et vivantes, que ce soit pour le jeu vidéo, la VR ou la narration interactive.
+      </p>
     </section>
 
-    <!-- ✅ RÉSEAUX -->
+    <!-- ✅ PRÉSENCE EN LIGNE -->
     <section class="section">
       <h2>🌐 Présence en ligne</h2>
       <ul>
         <li><a href="https://www.instagram.com/nico_krash/" target="_blank">📸 Instagram perso – @nico_krash</a></li>
         <li><a href="https://www.instagram.com/beyond_video_games_art/" target="_blank">🎮 Insta projet – @beyond_video_games_art</a></li>
         <li><a href="https://www.youtube.com/@owlcastlegames3037" target="_blank">🎥 YouTube – Owl Castle Games</a></li>
+        <li><a href="https://www.facebook.com/OwlCastleGames/" target="_blank">📘 Facebook – Owl Castle Games</a></li>
         <li><a href="https://nico_krash.artstation.com" target="_blank">🎨 ArtStation</a></li>
       </ul>
     </section>
@@ -164,22 +158,19 @@
           <img src="diorama.png" alt="Réalisation d’un diorama enneigé">
         </a>
         <a href="#" target="_blank">
-          <img src="Ymenok.png" alt="Ymenok Reborn FPS sur Unreal Engine">
+          <img src="Ymenok.png" alt="Ymenok Reborn FPS">
         </a>
         <a href="https://zora.co/@nico_krash" target="_blank">
           <img src="mascotte.png" alt="Mascotte NFT">
         </a>
         <a href="#" target="_blank">
-          <img src="fangame.png" alt="Fangame hommage jeu culte">
+          <img src="fangame.png" alt="Fangame">
         </a>
         <a href="#" target="_blank">
-          <img src="RelicRumble.png" alt="Relic Rumble – Metal Slug Like 2.5D">
+          <img src="RelicRumble.png" alt="Relic Rumble – Metal Slug Like">
         </a>
         <a href="#" target="_blank">
-          <img src="Panda.png" alt="Projet Panda contemplatif">
-        </a>
-        <a href="#" target="_blank">
-          <img src="ComfyUi.png" alt="Workflow ComfyUI – IA générative">
+          <img src="Panda.png" alt="Panda Project">
         </a>
       </div>
     </section>
@@ -187,14 +178,14 @@
     <!-- ✅ LOGICIELS UTILISÉS -->
     <section class="section">
       <h2>🛠️ Logiciels utilisés</h2>
-      <div class="software-list">
+      <div class="software-icons">
         <img src="maya.png" alt="Autodesk Maya">
         <img src="zbrush.png" alt="ZBrush">
-        <img src="bl.png" alt="Blender">
-        <img src="ue.png" alt="Unreal Engine">
-        <img src="adobe.png" alt="Adobe Suite">
-        <img src="quill.webp" alt="Quill VR">
         <img src="3dsmax.webp" alt="3ds Max">
+        <img src="ue.png" alt="Unreal Engine">
+        <img src="bl.png" alt="Blender">
+        <img src="quill.webp" alt="Quill by Smoothstep">
+        <img src="adobe.png" alt="Suite Adobe">
         <img src="ComfyUi.png" alt="ComfyUI">
       </div>
     </section>
