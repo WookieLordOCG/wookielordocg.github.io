@@ -23,11 +23,16 @@
       display: block;
     }
 
-    .banner {
+    .banner-container {
       width: 100%;
-      aspect-ratio: 16 / 9;
-      object-fit: contain;
-      background-color: #000;
+      overflow: hidden;
+    }
+
+    .banner-container img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block;
     }
 
     main {
@@ -113,12 +118,14 @@
 </head>
 <body>
 
-  <!-- Bannière principale -->
-  <img src="Banniere.png" alt="Nicolas Krasnoholowy – 3D Artist" class="banner">
+  <!-- ✅ BANNIÈRE RESPONSIVE -->
+  <div class="banner-container">
+    <img src="Banniere.png" alt="Nicolas Krasnoholowy – 3D Artist">
+  </div>
 
   <main>
 
-    <!-- Présentation -->
+    <!-- ✅ PRÉSENTATION -->
     <section class="section intro">
       <img src="portrait.png" alt="Portrait de Nico Krash">
       <div>
@@ -127,7 +134,7 @@
       </div>
     </section>
 
-    <!-- Réseaux -->
+    <!-- ✅ RÉSEAUX -->
     <section class="section">
       <h2>🌐 Présence en ligne</h2>
       <ul>
@@ -138,7 +145,7 @@
       </ul>
     </section>
 
-    <!-- Projets -->
+    <!-- ✅ PROJETS -->
     <section class="section">
       <h2>🧠 Projets & Réalisations</h2>
       <div class="project-gallery">
@@ -148,16 +155,31 @@
         <a href="https://gamma.app/docs/Realisation-dun-diorama-enneige-xglq8tawzlubawy?mode=doc" target="_blank">
           <img src="diorama.png" alt="Réalisation d’un diorama enneigé">
         </a>
+        <a href="#" target="_blank">
+          <img src="Ymenok.png" alt="Ymenok Reborn FPS">
+        </a>
+        <a href="https://zora.co/@nico_krash" target="_blank">
+          <img src="mascotte.png" alt="Mascotte NFT">
+        </a>
+        <a href="#" target="_blank">
+          <img src="fangame.png" alt="Fangame">
+        </a>
+        <a href="#" target="_blank">
+          <img src="RelicRumble.png" alt="Relic Rumble – Metal Slug Like">
+        </a>
+        <a href="#" target="_blank">
+          <img src="Panda.png" alt="Panda Project">
+        </a>
       </div>
     </section>
 
-    <!-- Vidéos -->
+    <!-- ✅ VIDÉOS -->
     <section class="section">
       <h2>📽️ Démos & vidéos (à venir)</h2>
       <p>Des vidéos de prototypes, scènes Unreal Engine, et process de création seront bientôt disponibles ici.</p>
     </section>
 
-    <!-- Contact -->
+    <!-- ✅ CONTACT -->
     <section class="section">
       <p>📧 Contact : <a href="mailto:krasnoholowy@gmail.com">krasnoholowy@gmail.com</a></p>
     </section>
@@ -166,4 +188,3 @@
 
 </body>
 </html>
-
