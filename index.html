@@ -59,17 +59,18 @@
       margin-bottom: 3em;
     }
 
-    .intro {
+    .intro-wrapper {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 2em;
-      flex-wrap: wrap;
+      text-align: center;
     }
 
-    .intro img {
-      width: 180px;
+    .intro-wrapper img {
+      width: 200px;
       border-radius: 100px;
-      box-shadow: 0 0 8px #000;
+      margin-bottom: 1em;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
     }
 
     ul {
@@ -81,19 +82,19 @@
       margin-bottom: 0.5em;
     }
 
-    .project-gallery {
+    .project-gallery, .software-list {
       display: flex;
       flex-wrap: wrap;
       gap: 1.5em;
       justify-content: center;
     }
 
-    .project-gallery a {
+    .project-gallery a, .software-list img {
       flex: 1 1 300px;
       max-width: 400px;
     }
 
-    .project-gallery img {
+    .project-gallery img, .software-list img {
       border-radius: 8px;
       box-shadow: 0 0 12px #000;
       transition: transform 0.3s ease;
@@ -103,42 +104,29 @@
       transform: scale(1.03);
     }
 
-    .tools-gallery {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5em;
-      justify-content: center;
-      align-items: center;
-      margin-top: 1em;
-    }
-
-    .tools-gallery img {
-      height: 60px;
-      object-fit: contain;
-      filter: drop-shadow(0 0 6px rgba(0,0,0,0.5));
-      transition: transform 0.2s ease;
-    }
-
-    .tools-gallery img:hover {
-      transform: scale(1.1);
+    .software-list img {
+      width: 100px;
+      height: auto;
     }
 
     @media (max-width: 600px) {
-      .intro {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
+      .intro-wrapper img {
+        width: 140px;
       }
 
-      .intro img {
-        width: 140px;
+      .project-gallery a {
+        flex: 1 1 100%;
+      }
+
+      .software-list img {
+        width: 80px;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- ✅ BANNIÈRE RESPONSIVE -->
+  <!-- ✅ BANNIÈRE -->
   <div class="banner-container">
     <img src="Banniere.png" alt="Nicolas Krasnoholowy – 3D Artist">
   </div>
@@ -147,10 +135,10 @@
 
     <!-- ✅ PRÉSENTATION -->
     <section class="section intro">
-      <img src="portrait.png" alt="Portrait de Nico Krash">
-      <div>
+      <div class="intro-wrapper">
+        <img src="portrait.png" alt="Portrait de Nico Krash">
         <h1>Bienvenue sur le portfolio de Nico Krash</h1>
-        <p>Je suis <strong>Nicolas Krasnoholowy</strong>, artiste visuel 2D/3D passionné par la création d'univers immersifs, la narration visuelle et le développement de projets interactifs. Je travaille sur Unreal Engine, des projets stylisés ou réalistes, et j’aime donner vie à des ambiances fortes.</p>
+        <p>Je suis <strong>Nicolas Krasnoholowy</strong>, artiste visuel 2D/3D passionné par la création d'univers immersifs, la narration visuelle et le développement de projets interactifs. J’ai étudié le design graphique et me suis spécialisé en conception d’univers visuels, modélisation, animation et narration visuelle. Je travaille principalement avec Unreal Engine pour créer des projets stylisés ou réalistes, et j’aime donner vie à des ambiances fortes et marquantes.</p>
       </div>
     </section>
 
@@ -176,37 +164,40 @@
           <img src="diorama.png" alt="Réalisation d’un diorama enneigé">
         </a>
         <a href="#" target="_blank">
-          <img src="Ymenok.png" alt="Ymenok Reborn FPS">
+          <img src="Ymenok.png" alt="Ymenok Reborn FPS sur Unreal Engine">
         </a>
         <a href="https://zora.co/@nico_krash" target="_blank">
           <img src="mascotte.png" alt="Mascotte NFT">
         </a>
         <a href="#" target="_blank">
-          <img src="fangame.png" alt="Fangame">
+          <img src="fangame.png" alt="Fangame hommage jeu culte">
         </a>
         <a href="#" target="_blank">
-          <img src="RelicRumble.png" alt="Relic Rumble – Metal Slug Like">
+          <img src="RelicRumble.png" alt="Relic Rumble – Metal Slug Like 2.5D">
         </a>
         <a href="#" target="_blank">
-          <img src="Panda.png" alt="Panda Project">
+          <img src="Panda.png" alt="Projet Panda contemplatif">
+        </a>
+        <a href="#" target="_blank">
+          <img src="ComfyUi.png" alt="Workflow ComfyUI – IA générative">
         </a>
       </div>
     </section>
 
-<!-- ✅ LOGICIELS -->
-<section class="section">
-  <h2>🛠️ Logiciels utilisés</h2>
-  <div class="tools-gallery">
-    <img src="maya.png" alt="Maya">
-    <img src="quill.webp" alt="Quill">
-    <img src="ue.png" alt="Unreal Engine">
-    <img src="zbrush.png" alt="ZBrush">
-    <img src="bl.png" alt="Blender">
-    <img src="adobe.png" alt="Adobe Suite">
-    <img src="3dsmax.webp" alt="3ds Max">
-    <img src="ComfyUi.png" alt="ComfyUI">
-  </div>
-</section>
+    <!-- ✅ LOGICIELS UTILISÉS -->
+    <section class="section">
+      <h2>🛠️ Logiciels utilisés</h2>
+      <div class="software-list">
+        <img src="maya.png" alt="Autodesk Maya">
+        <img src="zbrush.png" alt="ZBrush">
+        <img src="bl.png" alt="Blender">
+        <img src="ue.png" alt="Unreal Engine">
+        <img src="adobe.png" alt="Adobe Suite">
+        <img src="quill.webp" alt="Quill VR">
+        <img src="3dsmax.webp" alt="3ds Max">
+        <img src="ComfyUi.png" alt="ComfyUI">
+      </div>
+    </section>
 
     <!-- ✅ VIDÉOS -->
     <section class="section">
@@ -223,4 +214,3 @@
 
 </body>
 </html>
-
