@@ -12,7 +12,7 @@
       color: #eee;
     }
     header {
-      background-image: url('bannière.png'); /* Image avec accent */
+      background-image: url('banniere.png'); /* Image sans accent */
       background-size: cover;
       background-position: center;
       height: 300px;
@@ -42,9 +42,32 @@
     .section {
       margin-bottom: 3em;
     }
-    .project-links a {
-      display: block;
-      padding: 0.5em 0;
+    .project-gallery {
+      display: flex;
+      gap: 2em;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .project-gallery img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 8px;
+      box-shadow: 0 0 12px #000;
+      transition: transform 0.3s ease;
+    }
+    .project-gallery img:hover {
+      transform: scale(1.03);
+    }
+    .intro {
+      display: flex;
+      align-items: center;
+      gap: 2em;
+      flex-wrap: wrap;
+    }
+    .intro img {
+      width: 180px;
+      border-radius: 100px;
+      box-shadow: 0 0 8px #000;
     }
   </style>
 </head>
@@ -53,9 +76,13 @@
   <header></header>
 
   <main>
-    <section class="section">
-      <h1>Bienvenue sur le portfolio de Nico Krash</h1>
-      <p>Artiste visuel 2D/3D, designer d’univers vidéoludiques et créateur d’expériences immersives.</p>
+
+    <section class="section intro">
+      <img src="portrait.png" alt="Portrait de Nico Krash">
+      <div>
+        <h1>Bienvenue sur le portfolio de Nico Krash</h1>
+        <p>Je suis <strong>Nicolas Krasnoholowy</strong>, artiste visuel 2D/3D passionné par la création d'univers immersifs, la narration visuelle et le développement de projets interactifs. Je travaille sur Unreal Engine, des projets stylisés ou réalistes, et j’aime donner vie à des ambiances fortes.</p>
+      </div>
     </section>
 
     <section class="section">
@@ -70,9 +97,13 @@
 
     <section class="section">
       <h2>🧠 Projets & Réalisations</h2>
-      <div class="project-links">
-        <a href="https://gamma.app/docs/Realisation-dun-point-de-vue-immersif-c6phyifpc431cir?mode=doc" target="_blank">🔗 Réalisation d'un point de vue immersif</a>
-        <a href="https://gamma.app/docs/Realisation-dun-diorama-enneige-xglq8tawzlubawy?mode=doc" target="_blank">🔗 Réalisation d'un diorama enneigé</a>
+      <div class="project-gallery">
+        <a href="https://gamma.app/docs/Realisation-dun-point-de-vue-immersif-c6phyifpc431cir?mode=doc" target="_blank">
+          <img src="pdvi.png" alt="Point de vue immersif">
+        </a>
+        <a href="https://gamma.app/docs/Realisation-dun-diorama-enneige-xglq8tawzlubawy?mode=doc" target="_blank">
+          <img src="diorama.png" alt="Diorama enneigé">
+        </a>
       </div>
     </section>
 
@@ -84,6 +115,7 @@
     <section class="section">
       <p>📧 Contact : <a href="mailto:krasnoholowy@gmail.com">krasnoholowy@gmail.com</a></p>
     </section>
+
   </main>
 
 </body>
