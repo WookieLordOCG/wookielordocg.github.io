@@ -103,6 +103,26 @@
       transform: scale(1.03);
     }
 
+    .tools-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5em;
+      justify-content: center;
+      align-items: center;
+      margin-top: 1em;
+    }
+
+    .tools-gallery img {
+      height: 60px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 6px rgba(0,0,0,0.5));
+      transition: transform 0.2s ease;
+    }
+
+    .tools-gallery img:hover {
+      transform: scale(1.1);
+    }
+
     @media (max-width: 600px) {
       .intro {
         flex-direction: column;
@@ -173,6 +193,21 @@
       </div>
     </section>
 
+<!-- ✅ LOGICIELS -->
+<section class="section">
+  <h2>🛠️ Logiciels utilisés</h2>
+  <div class="tools-gallery">
+    <img src="maya.png" alt="Maya">
+    <img src="quill.webp" alt="Quill">
+    <img src="ue.png" alt="Unreal Engine">
+    <img src="zbrush.png" alt="ZBrush">
+    <img src="bl.png" alt="Blender">
+    <img src="adobe.png" alt="Adobe Suite">
+    <img src="3dsmax.webp" alt="3ds Max">
+    <img src="ComfyUi.png" alt="ComfyUI">
+  </div>
+</section>
+
     <!-- ✅ VIDÉOS -->
     <section class="section">
       <h2>📽️ Démos & vidéos (à venir)</h2>
@@ -188,3 +223,4 @@
 
 </body>
 </html>
+
