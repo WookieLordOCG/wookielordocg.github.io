@@ -61,14 +61,26 @@
     }
 
     .intro {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5em;
       text-align: center;
     }
 
     .intro img {
-      width: 240px;
+      width: 220px;
       border-radius: 100px;
-      box-shadow: 0 0 8px #000;
-      margin: auto;
+      box-shadow: 0 0 10px #000;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    li {
+      margin-bottom: 0.5em;
     }
 
     .project-gallery {
@@ -93,46 +105,41 @@
       transform: scale(1.03);
     }
 
-    .software-icons {
+    .software-logos {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 1em;
+      align-items: center;
     }
 
-    .software-icons img {
-      height: 60px;
+    .software-logos img {
+      height: 40px;
       background-color: #222;
-      padding: 10px;
-      border-radius: 8px;
+      padding: 6px;
+      border-radius: 6px;
+      box-shadow: 0 0 6px #000;
     }
 
-    /* ✅ Icône cachée */
-    .secret-link {
+    .secret-icon {
       position: fixed;
-      bottom: 10px;
-      right: 10px;
-      z-index: 1000;
-      opacity: 0.03;
-      transition: opacity 0.3s ease;
+      bottom: 12px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      z-index: 999;
+      opacity: 0.5;
+      transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
-    .secret-link:hover {
-      opacity: 0.4;
-    }
-
-    .secret-link img {
-      width: 20px;
-      height: 20px;
+    .secret-icon:hover {
+      opacity: 1;
+      transform: scale(1.1) rotate(5deg);
     }
 
     @media (max-width: 600px) {
       .intro img {
-        width: 180px;
-      }
-
-      .software-icons img {
-        height: 48px;
+        width: 160px;
       }
     }
   </style>
@@ -149,10 +156,12 @@
     <!-- ✅ PRÉSENTATION -->
     <section class="section intro">
       <img src="portrait.png" alt="Portrait de Nico Krash">
-      <h1>Bienvenue sur le portfolio de Nico Krash</h1>
-      <p>
-        Je suis <strong>Nicolas Krasnoholowy</strong>, artiste visuel 2D/3D passionné par la création d'univers immersifs, la narration visuelle et le développement de projets interactifs. Diplômé en design graphique et spécialisé dans les outils 3D, je développe depuis plusieurs années des environnements, des personnages et des prototypes ludiques avec Unreal Engine. Mon parcours m’a amené à explorer aussi bien des univers stylisés que réalistes, avec toujours le souci du détail et de la narration visuelle. Mon objectif : créer des expériences mémorables et vivantes, que ce soit pour le jeu vidéo, la VR ou la narration interactive.
-      </p>
+      <div>
+        <h1>Bienvenue sur le portfolio de Nico Krash</h1>
+        <p>
+          Je suis <strong>Nicolas Krasnoholowy</strong>, artiste visuel 2D/3D passionné par la création d'univers immersifs, la narration visuelle et le développement de projets interactifs. Diplômé en design et spécialisé dans la production d’environnements pour jeux vidéo, je travaille avec Unreal Engine sur des projets stylisés comme réalistes. J’accorde une grande importance à la cohérence visuelle, à la direction artistique et à la narration environnementale.
+        </p>
+      </div>
     </section>
 
     <!-- ✅ RÉSEAUX -->
@@ -162,7 +171,7 @@
         <li><a href="https://www.instagram.com/nico_krash/" target="_blank">📸 Instagram perso – @nico_krash</a></li>
         <li><a href="https://www.instagram.com/beyond_video_games_art/" target="_blank">🎮 Insta projet – @beyond_video_games_art</a></li>
         <li><a href="https://www.youtube.com/@owlcastlegames3037" target="_blank">🎥 YouTube – Owl Castle Games</a></li>
-        <li><a href="https://www.facebook.com/OwlCastleGames/" target="_blank">📘 Facebook – Owl Castle Games</a></li>
+        <li><a href="https://www.facebook.com/owlcastlegames" target="_blank">📘 Facebook – Owl Castle Games</a></li>
         <li><a href="https://nico_krash.artstation.com" target="_blank">🎨 ArtStation</a></li>
       </ul>
     </section>
@@ -184,13 +193,13 @@
           <img src="mascotte.png" alt="Mascotte NFT">
         </a>
         <a href="#" target="_blank">
-          <img src="fangame.png" alt="Fangame">
+          <img src="fangame.png" alt="Fangame Sonic">
         </a>
         <a href="#" target="_blank">
           <img src="RelicRumble.png" alt="Relic Rumble – Metal Slug Like">
         </a>
         <a href="#" target="_blank">
-          <img src="Panda.png" alt="Panda Project">
+          <img src="Panda.png" alt="Projet Pandamour">
         </a>
       </div>
     </section>
@@ -198,14 +207,14 @@
     <!-- ✅ LOGICIELS -->
     <section class="section">
       <h2>🛠️ Logiciels utilisés</h2>
-      <div class="software-icons">
-        <img src="maya.png" alt="Autodesk Maya">
+      <div class="software-logos">
+        <img src="maya.png" alt="Maya">
         <img src="zbrush.png" alt="ZBrush">
-        <img src="3dsmax.webp" alt="3ds Max">
+        <img src="3dsmax.webp" alt="3DS Max">
         <img src="ue.png" alt="Unreal Engine">
         <img src="bl.png" alt="Blender">
-        <img src="quill.webp" alt="Quill by Smoothstep">
-        <img src="adobe.png" alt="Suite Adobe">
+        <img src="quill.webp" alt="Quill">
+        <img src="adobe.png" alt="Adobe Suite">
         <img src="ComfyUi.png" alt="ComfyUI">
       </div>
     </section>
@@ -223,9 +232,9 @@
 
   </main>
 
-  <!-- ✅ LIEN VERS PAGE SECRÈTE (caché) -->
-  <a href="secret.html" class="secret-link">
-    <img src="Icon.ico" alt="🔒">
+  <!-- ✅ ICÔNE SECRÈTE CLIQUABLE -->
+  <a href="secret.html" class="secret-icon" title="...">
+    <img src="Icon.ico" alt="Accès secret">
   </a>
 
 </body>
