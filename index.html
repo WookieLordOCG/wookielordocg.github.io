@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Nico Krash – Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="Icon.ico" type="image/x-icon">
   <style>
     * {
       box-sizing: border-box;
@@ -106,6 +107,25 @@
       border-radius: 8px;
     }
 
+    /* ✅ Icône cachée */
+    .secret-link {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      z-index: 1000;
+      opacity: 0.03;
+      transition: opacity 0.3s ease;
+    }
+
+    .secret-link:hover {
+      opacity: 0.4;
+    }
+
+    .secret-link img {
+      width: 20px;
+      height: 20px;
+    }
+
     @media (max-width: 600px) {
       .intro img {
         width: 180px;
@@ -135,7 +155,7 @@
       </p>
     </section>
 
-    <!-- ✅ PRÉSENCE EN LIGNE -->
+    <!-- ✅ RÉSEAUX -->
     <section class="section">
       <h2>🌐 Présence en ligne</h2>
       <ul>
@@ -175,7 +195,7 @@
       </div>
     </section>
 
-    <!-- ✅ LOGICIELS UTILISÉS -->
+    <!-- ✅ LOGICIELS -->
     <section class="section">
       <h2>🛠️ Logiciels utilisés</h2>
       <div class="software-icons">
@@ -203,6 +223,10 @@
 
   </main>
 
+  <!-- ✅ LIEN VERS PAGE SECRÈTE (caché) -->
+  <a href="secret.html" class="secret-link">
+    <img src="Icon.ico" alt="🔒">
+  </a>
+
 </body>
 </html>
-
