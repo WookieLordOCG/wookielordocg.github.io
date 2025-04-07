@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Echoes of the Rift</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+    }
+    header {
+      background-image: url('fond01.png');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 3em;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 1em;
+    }
+    main {
+      max-width: 1000px;
+      margin: auto;
+      padding: 2em;
+    }
+    section {
+      margin-bottom: 3em;
+    }
+    h2 {
+      color: #ff9933;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-top: 1em;
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1em;
+    }
+    .gallery img {
+      width: calc(50% - 0.5em);
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Echoes of the Rift</h1>
+  </header>
+  <main>
+
+    <section>
+      <h2>Présentation du mod</h2>
+      <p><em>Echoes of the Rift</em> est un mod solo narratif pour Half-Life 1, qui vous plonge dans les prémices de la cascade de résonance. Vous incarnerez un scientifique isolé, pris dans un enchaînement d’événements interdimensionnels. Le mod mêle exploration, ambiance pesante, révélations et combats dans un univers enrichi.</p>
+    </section>
+
+    <section>
+      <h2>Le personnage principal</h2>
+      <p>Vous êtes le <strong>Dr Kael</strong>, un chercheur spécialiste des failles temporelles et des champs de résonance. Assigné à des missions de terrain sur Xen, vous faites partie des rares agents équipés de l’ancien modèle HEV utilisé lors des premières expéditions. Votre mission : comprendre les déséquilibres dimensionnels, et surtout… survivre aux conséquences de vos propres découvertes.</p>
+      <img src="presentation.png" alt="Présentation du personnage">
+      <img src="armure01.png" alt="Tenue HEV ancienne génération">
+      <img src="armure02.png" alt="Armure parasitée par headcrab">
+    </section>
+
+    <section>
+      <h2>Chronologie & chapitres</h2>
+      <p>Le mod débute plusieurs mois avant Half-Life 1. Il suit un arc temporel unique : avant HL1, hors du temps dans le Monde X, pendant HL1 (cascade de résonance), et jusqu'à la fin d'Opposing Force. Voici les grandes étapes :</p>
+      <ul>
+        <li>Chapitre 1 : Observation à Black Mesa</li>
+        <li>Chapitre 2 : Xen - les premières anomalies</li>
+        <li>Chapitre 3 : Extraction du cristal pur</li>
+        <li>Chapitre 4 : Vortex instable et Monde X</li>
+        <li>Chapitre 5 : Retour à Black Mesa en ruines</li>
+        <li>Chapitre 6 : Dernière expédition</li>
+      </ul>
+      <img src="chargement.png" alt="Écran de transition - retour à Black Mesa">
+    </section>
+
+    <section>
+      <h2>Les nouvelles unités de Xen</h2>
+      <div class="gallery">
+        <img src="xenflora01.png" alt="Sporeleech - parasite bondissant">
+        <img src="xenflora02.png" alt="Végétation toxique de Xen">
+        <img src="xenflora03.png" alt="Gardien fongique">
+        <img src="xenflora04.png" alt="Plantes explosives mutantes">
+        <img src="xen01.png" alt="Vortigaunt amélioré">
+        <img src="xen02.png" alt="Vortigaunt hostiles">
+        <img src="xen04.png" alt="Vortigaunt parasité">
+        <img src="xen05.png" alt="Vortigaunt zombie muté">
+      </div>
+    </section>
+
+    <section>
+      <h2>Les unités de la Race X</h2>
+      <div class="gallery">
+        <img src="rx01.png" alt="Exalté - guerrier augmenté">
+        <img src="rx02.png" alt="Gardien de la Source - caste supérieure de la Race X">
+      </div>
+    </section>
+
+    <section>
+      <h2>Les armes disponibles</h2>
+      <p>Le joueur aura accès à une combinaison d’armes humaines, biologiques et expérimentales, issues de Black Mesa, de Xen et du Monde X. (Illustrations à venir)</p>
+    </section>
+
+    <section>
+      <h2>Screenshots</h2>
+      <div class="gallery">
+        <img src="fond02.png" alt="Portail vers le Monde X">
+        <img src="flux.png" alt="Chasseur de Flux - élite de Xen">
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>
