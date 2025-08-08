@@ -1,279 +1,475 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Nico Krash – Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="Icon.ico" type="image/x-icon">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nico Krash — Portfolio 3D</title>
+  <meta name="description" content="Portfolio de Nicolas Krasnoholowy — Artiste 2D/3D, Unreal Engine, direction artistique, environnements, prototypage gameplay." />
+  <meta property="og:title" content="Nico Krash — Portfolio 3D" />
+  <meta property="og:description" content="Artiste 2D/3D & Unreal Engine — environnements, DA, gameplay prototypes, narration visuelle." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="Icon.ico" type="image/x-icon" />
   <style>
-    * {
-      box-sizing: border-box;
+    :root {
+      --bg: #0e0f12;
+      --panel: #13151a;
+      --text: #e9eef5;
+      --muted: #a9b1bd;
+      --brand: #86c5ff; /* accent doux */
+      --brand-2: #5ee1c0; /* accent secondaire */
+      --ring: rgba(134, 197, 255, 0.35);
+      --shadow: 0 8px 24px rgba(0,0,0,0.45);
+      --radius: 18px;
+      --grid-gap: clamp(16px, 2vw, 28px);
     }
 
+    [data-theme="light"] {
+      --bg: #f7f9fb;
+      --panel: #ffffff;
+      --text: #0e1116;
+      --muted: #586173;
+      --brand: #2b74ff;
+      --brand-2: #0bb;
+      --ring: rgba(43, 116, 255, 0.25);
+      --shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    * { box-sizing: border-box }
+    html, body { height: 100% }
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #111;
-      color: #eee;
+      font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
+    a { color: var(--brand); text-decoration: none }
+    a:hover { text-decoration: underline }
+
+    .container { width: min(1120px, 92vw); margin: 0 auto; }
+
+    /* ── Header ───────────────────────────────────────────────────────────── */
+    header {
+      position: sticky; top: 0; z-index: 40;
+      backdrop-filter: saturate(1.1) blur(8px);
+      background: color-mix(in oklab, var(--bg) 75%, transparent);
+      border-bottom: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
+    }
+    .nav {
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px; padding: 12px 0;
+    }
+    .brand { display:flex; align-items:center; gap:12px; font-weight:700; letter-spacing:.2px }
+    .brand .dot { width:10px; height:10px; border-radius:999px; background:linear-gradient(135deg, var(--brand), var(--brand-2)); box-shadow:0 0 0 6px var(--ring) }
+    .nav a.btn { padding:10px 14px; border-radius:999px; background:linear-gradient(135deg, var(--brand), var(--brand-2)); color:#061018; font-weight:600; box-shadow: var(--shadow); border: none }
+    .nav a.btn:hover { filter:brightness(1.05) }
+
+    .theme-toggle { appearance:none; border:1px solid color-mix(in oklab, var(--text) 12%, transparent); background:var(--panel); color:var(--text);
+      padding:8px 12px; border-radius:999px; cursor:pointer; font-weight:600 }
+
+    /* ── Hero / Banner ───────────────────────────────────────────────────── */
+    .hero { position: relative; overflow: clip; }
+    .hero-media { position: relative; height: clamp(320px, 46vw, 520px); border-radius: 0 0 var(--radius) var(--radius); }
+    .hero-media .parallax {
+      position:absolute; inset:-10%; background:url('Banniere.png') center/cover no-repeat fixed; transform: translateZ(0);
+      filter: saturate(1.03) contrast(1.04);
+    }
+    .hero-overlay { position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.55)); }
+    .hero-inner { position:absolute; inset:0; display:grid; place-items:end start; padding: clamp(16px, 4vw, 48px); }
+    .hero-title { font-size: clamp(28px, 5vw, 56px); line-height:1.1; margin: 0 0 8px 0; text-shadow: 0 8px 28px rgba(0,0,0,.55) }
+    .hero-sub { font-size: clamp(14px, 2vw, 18px); color: var(--muted); max-width: 60ch }
+
+    /* ── Sections ────────────────────────────────────────────────────────── */
+    section { padding: clamp(28px, 6vw, 72px) 0; }
+    .section-title { font-size: clamp(22px, 2.8vw, 32px); margin: 0 0 20px 0; }
+    .panel { background:var(--panel); border:1px solid color-mix(in oklab, var(--text) 10%, transparent); border-radius: var(--radius); box-shadow: var(--shadow) }
+
+    /* Intro */
+    .intro { display:grid; grid-template-columns: 220px 1fr; gap: var(--grid-gap); align-items: center }
+    .intro .avatar { width: 220px; height: 220px; border-radius: 28px; object-fit: cover; box-shadow: var(--shadow) }
+    .intro .bio { padding: clamp(14px, 2vw, 24px) }
+    .intro .bio p { margin: 0 0 12px 0 }
+
+    @media (max-width: 720px){
+      .intro { grid-template-columns: 1fr; }
+      .intro .avatar { width: 100%; height: auto; border-radius: var(--radius); }
     }
 
-    .banner-container {
-      width: 100%;
-      overflow: hidden;
-    }
+    /* Projects Grid */
+    .projects-grid { display:grid; grid-template-columns: repeat(12, 1fr); gap: var(--grid-gap) }
+    .card { grid-column: span 6; background:linear-gradient(180deg, color-mix(in oklab, var(--panel) 88%, transparent), color-mix(in oklab, var(--panel) 100%, #000));
+      border:1px solid color-mix(in oklab, var(--text) 10%, transparent); border-radius: var(--radius); overflow:hidden; position:relative; box-shadow: var(--shadow);
+      transform-style: preserve-3d; transition: transform .3s ease, box-shadow .3s ease; }
+    .card:hover { box-shadow: 0 18px 48px rgba(0,0,0,.55) }
+    .card-media { aspect-ratio: 16/9; background:#0c0e13; position:relative; overflow:hidden }
+    .card-media img { width:100%; height:100%; object-fit: cover; display:block; }
+    .card-badges { position:absolute; top:10px; left:10px; display:flex; gap:8px }
+    .badge { font-size:12px; padding:6px 10px; border-radius:999px; background: color-mix(in oklab, var(--bg) 40%, transparent); border:1px solid color-mix(in oklab, var(--text) 12%, transparent); backdrop-filter: blur(6px) }
+    .card-body { padding: 14px 16px 18px }
+    .card h3 { margin: 0 0 4px 0; font-size: 18px }
+    .card p { margin: 0; color: var(--muted); font-size: 14px }
 
-    .banner-container img {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-      display: block;
-    }
+    @media (max-width: 900px){ .card { grid-column: span 12 } }
 
-    main {
-      padding: 2em;
-      max-width: 1000px;
-      margin: auto;
-    }
+    /* Software carousel */
+    .softwrap { overflow:hidden; border-radius: var(--radius); border:1px solid color-mix(in oklab, var(--text) 10%, transparent) }
+    .softstrip { display:flex; gap: 18px; align-items:center; padding: 14px; background: var(--panel); animation: marquee 22s linear infinite }
+    .softstrip:hover { animation-play-state: paused }
+    .softstrip img { height: 40px; background:#0f1218; padding: 8px 10px; border-radius: 10px; box-shadow: var(--shadow) }
+    @keyframes marquee { from{ transform: translateX(0) } to{ transform: translateX(-50%) } }
 
-    h1, h2 {
-      color: #90caf9;
-      margin-top: 0.5em;
-    }
+    /* Videos & Links */
+    .links { display:grid; grid-template-columns: repeat(12, 1fr); gap: var(--grid-gap) }
+    .links li { list-style:none }
+    .links a { display:block; padding: 14px 16px; border-radius: 12px; background: var(--panel); border:1px solid color-mix(in oklab, var(--text) 10%, transparent) }
 
-    a {
-      color: #90caf9;
-      text-decoration: none;
-    }
+    /* Footer */
+    footer { padding: 28px 0 56px; color: var(--muted) }
 
-    a:hover {
-      text-decoration: underline;
-    }
+    /* Reveal on scroll */
+    .reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease }
+    .reveal.is-visible { opacity: 1; transform: translateY(0) }
 
-    .section {
-      margin-bottom: 3em;
-    }
+    /* Secret icon */
+    .secret-icon { position: fixed; bottom: 14px; right: 14px; width: 32px; height: 32px; z-index: 50; opacity: .6; transition: .3s ease transform, .3s ease opacity }
+    .secret-icon:hover { opacity: 1; transform: scale(1.06) rotate(5deg) }
 
-    .intro {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.5em;
-      text-align: center;
-    }
+    /* Minimal canvas orb */
+    .orb { position:absolute; inset:auto 24px -38px auto; width: 160px; height: 160px; filter: drop-shadow(0 10px 30px rgba(0,0,0,.55)); opacity:.9 }
 
-    .intro img {
-      width: 220px;
-      border-radius: 100px;
-      box-shadow: 0 0 10px #000;
-    }
-
-    ul {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    li {
-      margin-bottom: 0.5em;
-    }
-
-    .project-gallery {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5em;
-      justify-content: center;
-    }
-
-    .project-gallery a {
-      flex: 1 1 300px;
-      max-width: 400px;
-    }
-
-    .project-gallery img {
-      border-radius: 8px;
-      box-shadow: 0 0 12px #000;
-      transition: transform 0.3s ease;
-    }
-
-    .project-gallery img:hover {
-      transform: scale(1.03);
-    }
-
-    .software-logos {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1em;
-      align-items: center;
-    }
-
-    .software-logos img {
-      height: 40px;
-      background-color: #222;
-      padding: 6px;
-      border-radius: 6px;
-      box-shadow: 0 0 6px #000;
-    }
-
-    .secret-icon {
-      position: fixed;
-      bottom: 12px;
-      right: 12px;
-      width: 32px;
-      height: 32px;
-      z-index: 999;
-      opacity: 0.5;
-      transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-
-    .secret-icon:hover {
-      opacity: 1;
-      transform: scale(1.1) rotate(5deg);
-    }
-
-    @media (max-width: 600px) {
-      .intro img {
-        width: 160px;
-      }
-    }
+    /* Mini‑jeu: zone & canvas */
+    .game-wrap { position: relative; }
+    #mazeCanvas { width: 100%; height: auto; aspect-ratio: 16/9; display:block; border-radius: var(--radius); background: radial-gradient(120% 100% at 50% 0%, #0f131b, #0a0d13); border:1px solid color-mix(in oklab, var(--text) 10%, transparent); box-shadow: var(--shadow) }
+    .game-ui { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:10px }
+    .pill { padding:8px 12px; border-radius:999px; background: color-mix(in oklab, var(--panel) 80%, transparent); border:1px solid color-mix(in oklab, var(--text) 12%, transparent); font-size:14px }
   </style>
 </head>
 <body>
-
-  <!-- ✅ BANNIÈRE -->
-  <div class="banner-container">
-    <img src="Banniere.png" alt="Nicolas Krasnoholowy – 3D Artist">
-  </div>
+  <header>
+    <div class="container nav">
+      <div class="brand"><span class="dot"></span> Nico Krash — 3D / Unreal / DA</div>
+      <nav style="display:flex; gap:10px; align-items:center">
+        <a href="#projets">Projets</a>
+        <a href="#videos">Vidéos</a>
+        <a href="#outils">Outils</a>
+        <a href="#labyrinth">Mini‑jeu</a>
+        <a href="#contact" class="btn">Me contacter</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Basculer le thème">🌗</button>
+      </nav>
+    </div>
+  </header>
 
   <main>
-
-    <!-- ✅ PRÉSENTATION -->
-    <section class="section intro">
-      <img src="portrait.png" alt="Portrait de Nico Krash">
-      <div>
-        <h1>Bienvenue sur le portfolio de Nico Krash</h1>
-        <p>
-          Je suis <strong>Nicolas Krasnoholowy</strong>, artiste visuel 2D/3D passionné par la création d'univers immersifs, la narration visuelle et le développement de projets interactifs. Diplômé en design et spécialisé dans la production d’environnements pour jeux vidéo, je travaille avec Unreal Engine sur des projets stylisés comme réalistes. J’accorde une grande importance à la cohérence visuelle, à la direction artistique et à la narration environnementale.
-<p>
-          En 2016, j'ai co-fondé le studio <strong>Owl Castle Games</strong>, où j'ai travaillé sur <em>Ymenok Reborn</em>, un FPS sci-fi au concept original. À travers ce projet, j'ai participé activement à toutes les étapes du développement, depuis les phases de prototypage jusqu'à la présentation du jeu lors d'événements comme la Paris Games Week et Japan Expo. J'ai acquis une expertise en développement sous Unreal Engine (UE4/UE5), en gestion de projet, et en conception de fonctionnalités innovantes. Cette expérience m'a permis de développer une grande autonomie, une capacité d'adaptation et une aptitude à collaborer étroitement avec des équipes pluridisciplinaires.
-        </p>
-        <p>
-          Je maîtrise particulièrement bien le système de Blueprints avec une connaissance du C++, ce qui m'a permis de concevoir des mécaniques de gameplay style FPS, 2D Metal Slug-like, d'intégrer des environnements interactifs et d'optimiser les performances globales des projets. Par ailleurs, ma curiosité et mon sens du détail m'ont amené à explorer des styles visuels variés, notamment grâce à des outils comme Substance Painter, ZBrush, et des techniques d'IA générative. Ces compétences me permettraient de m'adapter à des esthétiques uniques, notamment des rendus proches de l'aquarelle, et de collaborer efficacement avec des équipes artistiques pour faire évoluer les pipelines de production.
-        </p>
-        <p>
-          Outre mes compétences techniques, je suis passionné par la conception et la mécanique des jeux. J'ai une solide culture vidéoludique et un réel intérêt pour la recherche de solutions innovantes qui améliorent l'expérience des joueurs. J'accorde une grande importance à la communication au sein des équipes, favorisant ainsi un environnement de travail collaboratif et bienveillant.
-        </p>
-        <p>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-media">
+        <div class="parallax" aria-hidden="true"></div>
+        <div class="hero-overlay"></div>
+        <canvas class="orb" id="orb" width="320" height="320" aria-hidden="true"></canvas>
+        <div class="hero-inner container">
+          <div>
+            <h1 class="hero-title">Artiste 2D/3D & Unreal Engine</h1>
+            <p class="hero-sub">Direction artistique, environnements, narration visuelle, prototypage gameplay. J'aime les univers forts, la précision technique, et les pipelines efficaces. Basé à Paris, ouvert aux collaborations.</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- ✅ RÉSEAUX -->
-    <section class="section">
-      <h2>🌐 Présence en ligne</h2>
-      <ul>
-        <li><a href="https://www.instagram.com/nico_krash/" target="_blank">📸 Instagram perso – @nico_krash</a></li>
-        <li><a href="https://www.instagram.com/beyond_video_games_art/" target="_blank">🎮 Insta projet – @beyond_video_games_art</a></li>
-        <li><a href="https://www.youtube.com/@owlcastlegames3037" target="_blank">🎥 YouTube – Owl Castle Games</a></li>
-        <li><a href="https://www.facebook.com/owlcastlegames" target="_blank">📘 Facebook – Owl Castle Games</a></li>
-        <li><a href="https://nico_krash.artstation.com" target="_blank">🎨 ArtStation</a></li>
+    <!-- Intro / Bio -->
+    <section class="container reveal">
+      <div class="intro panel">
+        <img src="portrait.png" alt="Portrait de Nicolas Krasnoholowy" class="avatar" />
+        <div class="bio">
+          <h2 class="section-title">Bonjour, moi c'est Nico.</h2>
+          <p>Je conçois des <strong>univers jouables</strong> et des <strong>environnements 3D</strong> en <strong>Unreal Engine</strong>, du stylisé au réaliste. Mon terrain de jeu : DA, level art, intégration Blueprint, optimisation, et petites features de gameplay.</p>
+          <p>Co-fondateur d'<strong>Owl Castle Games</strong>, j'ai développé <em>Ymenok Reborn</em> (FPS sci-fi) présenté à la Paris Games Week et Japan Expo. Autonome, polyvalent, à l'aise en équipe pluridisciplinaire.</p>
+          <p>Outils quotidiens : Unreal (UE4/UE5), Blender/Maya, ZBrush, Substance, Quixel, Photoshop, ComfyUI. J'explore aussi l'IA générative pour accélérer R&D et moodboards.</p>
+          <p style="margin-top:14px"><a class="btn" href="https://emploi.afjv.com/c2023/12/15/880195ER.pdf" target="_blank" rel="noopener">📄 Voir mon CV</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projets" class="container reveal">
+      <h2 class="section-title">Projets & Réalisations</h2>
+      <div class="projects-grid">
+        <a class="card tilt" href="https://gamma.app/docs/Realisation-dun-point-de-vue-immersif-c6phyifpc431cir?mode=doc" target="_blank" rel="noopener">
+          <div class="card-media"><img src="pdvi.png" alt="Point de vue immersif — étude de cadrage et lumière" /></div>
+          <div class="card-badges"><span class="badge">Lighting</span><span class="badge">Composition</span></div>
+          <div class="card-body"><h3>Point de vue immersif</h3><p>Étude DA & composition, exploration d'atmosphères.</p></div>
+        </a>
+        <a class="card tilt" href="https://gamma.app/docs/Realisation-dun-diorama-enneige-xglq8tawzlubawy?mode=doc" target="_blank" rel="noopener">
+          <div class="card-media"><img src="diorama.png" alt="Diorama enneigé — shaders et matériaux" /></div>
+          <div class="card-badges"><span class="badge">Shaders</span><span class="badge">Matériaux</span></div>
+          <div class="card-body"><h3>Diorama enneigé</h3><p>Neige stylisée, lecture des volumes, storytelling.</p></div>
+        </a>
+        <a class="card tilt" href="https://gamma.app/docs/Crown-Of-Hispania-n7b964nkllbi9gf?mode=doc" target="_blank" rel="noopener">
+          <div class="card-media"><img src="strategie.png" alt="Crown of Hispania — UI & système" /></div>
+          <div class="card-badges"><span class="badge">UI</span><span class="badge">Systèmes</span></div>
+          <div class="card-body"><h3>Crown of Hispania</h3><p>Prototype de stratégie — wireframes + maquettes UI.</p></div>
+        </a>
+        <a class="card tilt" href="https://owlcastlegames.itch.io/ymenok-reborn" target="_blank" rel="noopener">
+          <div class="card-media"><img src="Ymenok.png" alt="Ymenok Reborn — FPS sci-fi" /></div>
+          <div class="card-badges"><span class="badge">Unreal</span><span class="badge">Gameplay</span></div>
+          <div class="card-body"><h3>Ymenok Reborn</h3><p>FPS narratif — prototypage, intégration, level art.</p></div>
+        </a>
+        <a class="card tilt" href="#" target="_blank" rel="noopener">
+          <div class="card-media"><img src="RelicRumble.png" alt="Relic Rumble — run & gun" /></div>
+          <div class="card-badges"><span class="badge">Pixel</span><span class="badge">Game Feel</span></div>
+          <div class="card-body"><h3>Relic Rumble</h3><p>Metal Slug-like — DA, animations, prototypes.</p></div>
+        </a>
+        <a class="card tilt" href="Rift.html" target="_blank" rel="noopener">
+          <div class="card-media"><img src="lambda.png" alt="Mod Half-Life — Discover of the Rift" /></div>
+          <div class="card-badges"><span class="badge">Level Design</span><span class="badge">Scripting</span></div>
+          <div class="card-body"><h3>Discover of the Rift</h3><p>Mod HL — 42 maps, narration environnementale.</p></div>
+        </a>
+        <a class="card tilt" href="#" target="_blank" rel="noopener">
+          <div class="card-media"><img src="fangame.png" alt="Sonic MechaDrive — fangame" /></div>
+          <div class="card-badges"><span class="badge">Prototype</span><span class="badge">Physique</span></div>
+          <div class="card-body"><h3>Sonic MechaDrive</h3><p>Fangame rétro-futuriste, boucles & momentum.</p></div>
+        </a>
+        <a class="card tilt" href="#" target="_blank" rel="noopener">
+          <div class="card-media"><img src="Panda.png" alt="Pandamour — livre illustré" /></div>
+          <div class="card-badges"><span class="badge">Illustration</span><span class="badge">Narration</span></div>
+          <div class="card-body"><h3>Pandamour</h3><p>Réalisme stylisé — format livre, public jeunesse.</p></div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Videos / Démos -->
+    <section id="videos" class="container reveal">
+      <h2 class="section-title">Démos & Vidéos</h2>
+      <ul class="links">
+        <li class="card" style="grid-column: span 6">
+          <a href="https://1fichier.com/?hw9csrko4uyv7aasf7ec" target="_blank" rel="noopener">🎮 Démo Ymenok Reborn — Télécharger (1fichier)</a>
+        </li>
+        <li class="card" style="grid-column: span 6">
+          <a href="https://youtu.be/PoEy6gOA7GM" target="_blank" rel="noopener">🌀 Test d'animation — YouTube</a>
+        </li>
+        <li class="card" style="grid-column: span 6">
+          <a href="https://youtu.be/Za5Tt6CSM2Q" target="_blank" rel="noopener">🦔 WIP Sonic MechaDrive — YouTube</a>
+        </li>
+        <li class="card" style="grid-column: span 6">
+          <a href="https://youtu.be/Yg3fSIxL8Rw" target="_blank" rel="noopener">💥 WIP Relic Rumble — YouTube</a>
+        </li>
       </ul>
     </section>
 
-    <!-- ✅ PROJETS -->
-    <section class="section">
-      <h2>🧠 Projets & Réalisations</h2>
-      <div class="project-gallery">
-        <a href="https://gamma.app/docs/Realisation-dun-point-de-vue-immersif-c6phyifpc431cir?mode=doc" target="_blank">
-          <img src="pdvi.png" alt="Réalisation d’un point de vue immersif">
-        </a>
-        <a href="https://gamma.app/docs/Realisation-dun-diorama-enneige-xglq8tawzlubawy?mode=doc" target="_blank">
-          <img src="diorama.png" alt="Réalisation d’un diorama enneigé">
-        </a>
-        <a href="https://gamma.app/docs/Crown-Of-Hispania-n7b964nkllbi9gf?mode=doc" target="_blank">
-          <img src="strategie.png" alt="Crown of Hispania">
-        </a>
-        <a href="https://owlcastlegames.itch.io/ymenok-reborn" target="_blank">
-          <img src="Ymenok.png" alt="Ymenok Reborn FPS">
-        </a>
-        <a href="#" target="_blank">
-          <img src="RelicRumble.png" alt="Relic Rumble – Metal Slug Like">
-        </a>
-        <a href="Rift.html" target="_blank">
-          <img src="lambda.png" alt="Mod HalfLife">
-        </a>
-        <a href="#" target="_blank">
-          <img src="fangame.png" alt="Fangame Sonic">
-        </a>
-        <a href="#" target="_blank">
-          <img src="Panda.png" alt="Projet Pandamour">
-        </a>
+    <!-- Outils -->
+    <section id="outils" class="container reveal">
+      <h2 class="section-title">Logiciels & Outils</h2>
+      <div class="softwrap">
+        <div class="softstrip">
+          <img src="ue.png" alt="Unreal Engine" />
+          <img src="bl.png" alt="Blender" />
+          <img src="maya.png" alt="Maya" />
+          <img src="3dsmax.webp" alt="3ds Max" />
+          <img src="zbrush.png" alt="ZBrush" />
+          <img src="adobe.png" alt="Adobe Suite" />
+          <img src="quill.webp" alt="Quill" />
+          <img src="ComfyUi.png" alt="ComfyUI" />
+          <img src="ue.png" alt="Unreal Engine" />
+          <img src="bl.png" alt="Blender" />
+          <img src="maya.png" alt="Maya" />
+          <img src="3dsmax.webp" alt="3ds Max" />
+          <img src="zbrush.png" alt="ZBrush" />
+          <img src="adobe.png" alt="Adobe Suite" />
+          <img src="quill.webp" alt="Quill" />
+          <img src="ComfyUi.png" alt="ComfyUI" />
+        </div>
       </div>
     </section>
 
-    <!-- ✅ LOGICIELS -->
-    <section class="section">
-      <h2>🛠️ Logiciels utilisés</h2>
-      <div class="software-logos">
-        <img src="maya.png" alt="Maya">
-        <img src="zbrush.png" alt="ZBrush">
-        <img src="3dsmax.webp" alt="3DS Max">
-        <img src="ue.png" alt="Unreal Engine">
-        <img src="bl.png" alt="Blender">
-        <img src="quill.webp" alt="Quill">
-        <img src="adobe.png" alt="Adobe Suite">
-        <img src="ComfyUi.png" alt="ComfyUI">
+    <!-- Mini‑jeu: Marble Labyrinth -->
+    <section id="labyrinth" class="container reveal">
+      <h2 class="section-title">Mini‑jeu — Marble Labyrinth</h2>
+      <div class="panel" style="padding:16px">
+        <div class="game-wrap">
+          <canvas id="mazeCanvas" width="1280" height="720"></canvas>
+        </div>
+        <div class="game-ui">
+          <button class="theme-toggle" id="mazeReset">Reset</button>
+          <span class="pill">Contrôles: <strong>Flèches / WASD</strong>, ou <strong>drag</strong> pour incliner. Sur mobile: <strong>incline l'appareil</strong>.</span>
+          <span class="pill" id="mazeStatus">Prêt.</span>
+        </div>
       </div>
     </section>
 
-<!-- ✅ VIDÉOS -->
-<section class="section">
-  <h2>📽️ Démos & vidéos</h2>
-  <ul>
-    <li>
-      🎮 <strong>Démo Ymenok Reborn</strong> – 
-      <a href="https://1fichier.com/?hw9csrko4uyv7aasf7ec" target="_blank">Télécharger sur 1fichier</a>
-    </li>
-    <li>
-      🌀 <strong>Test d'animation</strong> – 
-      <a href="https://youtu.be/PoEy6gOA7GM" target="_blank">Voir sur YouTube</a>
-    </li>
-    <li>
-      🦔 <strong>WIP Sonic MechaDrive</strong> – 
-      <a href="https://youtu.be/Za5Tt6CSM2Q" target="_blank">Voir sur YouTube</a>
-    </li>
-    <li>
-      💥 <strong>WIP Relic Rumble</strong> – <a href="https://youtu.be/Yg3fSIxL8Rw" target="_blank">Voir sur YouTube</a></li>
-  </ul>
-</section>
+    <!-- Réseaux -->
+    <section class="container reveal">
+      <h2 class="section-title">Présence en ligne</h2>
+      <ul class="links">
+        <li class="card" style="grid-column: span 6"><a href="https://nico_krash.artstation.com" target="_blank" rel="noopener">🎨 ArtStation</a></li>
+        <li class="card" style="grid-column: span 6"><a href="https://www.instagram.com/nico_krash/" target="_blank" rel="noopener">📸 Instagram — @nico_krash</a></li>
+        <li class="card" style="grid-column: span 6"><a href="https://www.instagram.com/beyond_video_games_art/" target="_blank" rel="noopener">🎮 Insta projet — @beyond_video_games_art</a></li>
+        <li class="card" style="grid-column: span 6"><a href="https://www.youtube.com/@owlcastlegames3037" target="_blank" rel="noopener">🎥 YouTube — Owl Castle Games</a></li>
+        <li class="card" style="grid-column: span 6"><a href="https://www.facebook.com/owlcastlegames" target="_blank" rel="noopener">📘 Facebook — Owl Castle Games</a></li>
+        <li class="card" style="grid-column: span 6"><a href="https://krasnoholowy.wixsite.com/nico/" target="_blank" rel="noopener">📁 Archives 2012–2016</a></li>
+      </ul>
+    </section>
 
-    <!-- ✅ ARCHIVES & CV -->
-    <section class="section">
-      <h2>📁 Archives & CV</h2>
-      <div class="project-gallery">
-        <a href="https://krasnoholowy.wixsite.com/nico/" target="_blank">
-          <img src="archives.png" alt="Anciens travaux 2012-2016">
-        </a>
+    <!-- Contact -->
+    <section id="contact" class="container reveal">
+      <div class="panel" style="padding:18px 20px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap">
+        <div>
+          <h2 class="section-title" style="margin:0 0 4px 0">Discutons d'un projet</h2>
+          <p style="margin:0; color:var(--muted)">Disponible pour missions freelance et opportunités studio.</p>
+        </div>
+        <p style="margin:0"><a class="btn" href="mailto:krasnoholowy@gmail.com">📧 krasnoholowy@gmail.com</a></p>
       </div>
-      <p>📄 <a href="https://emploi.afjv.com/c2023/12/15/880195ER.pdf" target="_blank">Voir mon CV en PDF</a></p>
     </section>
 
-    <!-- ✅ CONTACT -->
-    <section class="section">
-      <p>📧 Contact : <a href="mailto:krasnoholowy@gmail.com">krasnoholowy@gmail.com</a></p>
-    </section>
-
+    <footer class="container">
+      <small>© <span id="year"></span> Nicolas Krasnoholowy — Portfolio</small>
+    </footer>
   </main>
 
-  <!-- ✅ ICÔNE SECRÈTE CLIQUABLE -->
-  <a href="secret.html" class="secret-icon" title="...">
-    <img src="Icon.ico" alt="Accès secret">
-  </a>
+  <a href="secret.html" class="secret-icon" title="…"><img src="Icon.ico" alt="Accès secret" /></a>
 
+  <script>
+    // ── Theme toggle with persistence
+    const themeToggle = document.getElementById('themeToggle');
+    const pref = localStorage.getItem('theme');
+    if (pref) document.documentElement.setAttribute('data-theme', pref);
+    themeToggle?.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', current);
+      localStorage.setItem('theme', current);
+    });
+
+    if (!pref) {
+      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      document.documentElement.setAttribute('data-theme', prefersLight ? 'light' : 'dark');
+    }
+
+    // ── Reveal on scroll
+    const io = new IntersectionObserver((entries)=>{
+      for(const e of entries){ if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); } }
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+    // ── Tilt effect on project cards
+    const strength = 12; // deg
+    document.querySelectorAll('.tilt').forEach(card => {
+      let bounds;
+      const reset = () => { card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg)'; };
+      card.addEventListener('pointerenter', ()=>{ bounds = card.getBoundingClientRect(); card.style.transition = 'transform .08s ease'; });
+      card.addEventListener('pointermove', (e)=>{
+        const x = (e.clientX - bounds.left) / bounds.width - .5;
+        const y = (e.clientY - bounds.top) / bounds.height - .5;
+        card.style.transform = `perspective(900px) rotateX(${(-y*strength).toFixed(2)}deg) rotateY(${(x*strength).toFixed(2)}deg)`;
+      });
+      card.addEventListener('pointerleave', ()=>{ card.style.transition = 'transform .3s ease'; reset(); });
+      reset();
+    });
+
+    // ── Parallax banner (subtle)
+    const parallax = document.querySelector('.parallax');
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY * 0.25; // subtle parallax
+      parallax.style.transform = `translate3d(0, ${y}px, 0)`;
+    }, { passive: true });
+
+    // ── Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ── Minimal "orb" canvas (no lib)
+    const canvas = document.getElementById('orb');
+    if (canvas && canvas.getContext) {
+      const ctx = canvas.getContext('2d');
+      const dpr = Math.max(1, window.devicePixelRatio || 1);
+      const W = canvas.width, H = canvas.height;
+      canvas.width = W * dpr; canvas.height = H * dpr; canvas.style.width = W+'px'; canvas.style.height = H+'px';
+      ctx.scale(dpr, dpr);
+      let t = 0;
+      function draw(){
+        t += 0.008;
+        ctx.clearRect(0,0,W,H);
+        const cx = W/2, cy = H/2, r = 72;
+        const g = ctx.createRadialGradient(cx, cy, 8, cx, cy, r*1.2);
+        g.addColorStop(0, 'rgba(94, 225, 192, 0.9)');
+        g.addColorStop(1, 'rgba(134, 197, 255, 0.05)');
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, r*1.2, 0, Math.PI*2); ctx.fill();
+        for(let i=0;i<5;i++){
+          const a = t + i*0.6;
+          ctx.save();
+          ctx.translate(cx, cy);
+          ctx.rotate(a);
+          ctx.scale(1, 0.35 + 0.13*i);
+          ctx.globalAlpha = 0.35 - i*0.05;
+          ctx.strokeStyle = 'rgba(134,197,255,0.7)';
+          ctx.lineWidth = 1.2;
+          ctx.beginPath(); ctx.arc(0,0,r,0,Math.PI*2); ctx.stroke();
+          ctx.restore();
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    }
+
+    // ── Mini‑jeu Marble Labyrinth (sans librairie)
+    ;(()=>{
+      const cvs = document.getElementById('mazeCanvas'); if(!cvs) return; const ctx = cvs.getContext('2d');
+      const dpr = Math.max(1, window.devicePixelRatio||1);
+      let ball = { x: 80, y: 80, vx: 0, vy: 0, r: 12 };
+      const GRAV = 1800; // px/s^2
+      const FRICTION = 0.995;
+      let tilt = { x: 0, y: 0 }; // -1..1
+      let last = performance.now();
+      let won = false;
+
+      const baseW = cvs.width, baseH = cvs.height;
+      const walls = [
+        [40,40, baseW-40,40],[baseW-40,40, baseW-40,baseH-40],[baseW-40,baseH-40,40,baseH-40],[40,baseH-40, 40,40],
+        [200,160, 1080,160],[200,160, 200,560],[1080,160, 1080,360],
+        [320,360, 1080,360],[320,360, 320,560],[600,360, 600,560],[860,360, 860,560],
+        [200,560, 1080,560]
+      ];
+      const holes = [ {x: 500, y: 250, r: 26}, {x: 740, y: 480, r: 26}, {x: 360, y: 520, r: 22} ];
+      const goal = { x: 1130, y: 500, r: 22 };
+
+      function reset(){ ball = { x: 80, y: 80, vx: 0, vy: 0, r: 12 }; won = false; status('Prêt.'); }
+      document.getElementById('mazeReset')?.addEventListener('click', reset);
+
+      const keys = {}; window.addEventListener('keydown', e=>{ keys[e.key.toLowerCase()] = true; }); window.addEventListener('keyup', e=>{ keys[e.key.toLowerCase()] = false; });
+      let dragging=false, prev=null; cvs.addEventListener('pointerdown', e=>{ dragging=true; prev={x:e.clientX,y:e.clientY} });
+      window.addEventListener('pointerup', ()=>{ dragging=false; prev=null; });
+      window.addEventListener('pointermove', e=>{ if(!dragging||!prev) return; const dx = (e.clientX-prev.x)/200; const dy=(e.clientY-prev.y)/200; tilt.x = clamp(dx,-1,1); tilt.y = clamp(dy,-1,1); });
+      window.addEventListener('deviceorientation', e=>{ if(e.beta!=null && e.gamma!=null){ tilt.x = clamp(e.gamma/30,-1,1); tilt.y = clamp((e.beta-90)/30,-1,1); } }, true);
+
+      function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
+      function status(msg){ const el = document.getElementById('mazeStatus'); if(el) el.textContent = msg }
+
+      function step(dt){
+        const ax = ( (keys['arrowright']||keys['d']) ? 1 : 0 ) - ( (keys['arrowleft']||keys['a']) ? 1 : 0 );
+        const ay = ( (keys['arrowdown']||keys['s']) ? 1 : 0 ) - ( (keys['arrowup']||keys['w']) ? 1 : 0 );
+        tilt.x = clamp(tilt.x*0.9 + ax*0.1, -1, 1); tilt.y = clamp(tilt.y*0.9 + ay*0.1, -1, 1);
+        const g = GRAV * dt; ball.vx += tilt.x * g; ball.vy += tilt.y * g; ball.vx *= FRICTION; ball.vy *= FRICTION; ball.x += ball.vx*dt; ball.y += ball.vy*dt;
+        collideWalls();
+        for(const h of holes){ const dx=ball.x-h.x, dy=ball.y-h.y, dist=Math.hypot(dx,dy); if(dist < h.r){ const pull = (h.r - dist) * 9; ball.vx -= (dx/dist||0)*pull*dt; ball.vy -= (dy/dist||0)*pull*dt; if(dist < h.r*0.55){ reset(); status('Oups ! Tombé.'); return; } } }
+        if(!won){ const d = Math.hypot(ball.x-goal.x, ball.y-goal.y); if(d < goal.r+ball.r){ won = true; status('🏁 Gagné !'); setTimeout(reset, 1500); }}
+      }
+
+      function collideWalls(){
+        for(const w of walls){ let [x1,y1,x2,y2] = w; const vx = x2-x1, vy=y2-y1; const wx = ball.x-x1, wy=ball.y-y1; const proj = clamp((wx*vx+wy*vy)/(vx*vx+vy*vy), 0, 1); const cx = x1 + proj*vx; const cy = y1 + proj*vy; const dx = ball.x-cx, dy = ball.y-cy; const dist = Math.hypot(dx,dy); const overlap = ball.r - dist; if(overlap>0){ const nx = (dx/(dist||1)), ny=(dy/(dist||1)); ball.x += nx*overlap; ball.y += ny*overlap; const vn = ball.vx*nx + ball.vy*ny; ball.vx -= 1.6*vn*nx; ball.vy -= 1.6*vn*ny; } }
+      }
+
+      function draw(){
+        ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,cvs.width, cvs.height);
+        const grad = ctx.createLinearGradient(0,0,0,cvs.height); grad.addColorStop(0,'#0b1220'); grad.addColorStop(1,'#0a0d13'); ctx.fillStyle = grad; ctx.fillRect(0,0,cvs.width, cvs.height);
+        ctx.strokeStyle = 'rgba(134,197,255,.25)'; ctx.lineWidth = 18; ctx.strokeRect(30,30,cvs.width-60,cvs.height-60);
+        ctx.strokeStyle = 'rgba(233, 238, 245, .85)'; ctx.lineWidth = 8; ctx.lineCap = 'round'; ctx.beginPath(); for(const [x1,y1,x2,y2] of walls){ ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); } ctx.stroke();
+        for(const h of holes){ const g = ctx.createRadialGradient(h.x,h.y,2,h.x,h.y,h.r); g.addColorStop(0,'#000'); g.addColorStop(1,'#0b0f16'); ctx.fillStyle=g; ctx.beginPath(); ctx.arc(h.x,h.y,h.r,0,Math.PI*2); ctx.fill(); ctx.strokeStyle='rgba(0,0,0,.6)'; ctx.lineWidth=2; ctx.stroke(); }
+        const gg = ctx.createRadialGradient(goal.x,goal.y,2,goal.x,goal.y,goal.r+8); gg.addColorStop(0,'#5ee1c0'); gg.addColorStop(1,'rgba(94,225,192,0)'); ctx.fillStyle=gg; ctx.beginPath(); ctx.arc(goal.x,goal.y,goal.r+6,0,Math.PI*2); ctx.fill(); ctx.fillStyle = '#5ee1c0'; ctx.beginPath(); ctx.arc(goal.x,goal.y,6,0,Math.PI*2); ctx.fill();
+        const sgrad = ctx.createRadialGradient(ball.x-4,ball.y-6,2,ball.x,ball.y,ball.r); sgrad.addColorStop(0,'#fff'); sgrad.addColorStop(1,'#86c5ff'); ctx.fillStyle = sgrad; ctx.beginPath(); ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI*2); ctx.fill(); ctx.strokeStyle='rgba(0,0,0,.35)'; ctx.lineWidth=1; ctx.stroke();
+      }
+
+      function loop(now){ const dt = Math.min(0.033, (now - last)/1000); last = now; step(dt); draw(); requestAnimationFrame(loop); }
+      reset(); requestAnimationFrame(loop);
+    })();
+  </script>
 </body>
 </html>
