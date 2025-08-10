@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Nico Krash — Portfolio 3D</title>
+  <title>Nico Krash — Portfolio 3D (Pro – Feed BG v2)</title>
   <meta name="description" content="Portfolio de Nicolas Krasnoholowy — Artiste 2D/3D, Unreal Engine, environnements, DA, narration visuelle.">
   <link rel="icon" href="Icon.ico" type="image/x-icon" />
   <style>
@@ -13,15 +13,23 @@
       --brand:#86c5ff; --brand2:#5ee1c0; --ring:rgba(134,197,255,.25);
       --radius:18px; --radius-sm:12px; --shadow:0 16px 44px rgba(0,0,0,.45);
       --gap:clamp(16px,2vw,28px); --container:max(72px, 4vw); --maxw:1280px;
+      /* z-index map */
+      --z-bg:-2;        /* arrière-plan (canvas) */
+      --z-content:2;    /* contenu principal */
+      --z-walker:5;     /* petit caméléon */
+      --z-egg:9999;     /* icône secrète au-dessus de tout */
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{margin:0; font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial;
          background:var(--bg); color:var(--text); line-height:1.65; overflow-x:hidden}
 
-    /* BACKGROUND FX */
-    #bgfx{position:fixed; inset:0; z-index:-1; pointer-events:none}
-    #walker{position:fixed; left:0; right:0; bottom:0; height:84px; width:100vw; pointer-events:none; z-index:5}
+    /* Canvases correctement placés derrière le contenu */
+    #bgfx{position:fixed; inset:0; z-index:var(--z-bg); pointer-events:none}
+    #walker{position:fixed; left:0; right:0; bottom:0; height:84px; width:100vw; pointer-events:none; z-index:var(--z-walker)}
+
+    /* S'assurer que tout le contenu est au-dessus du fond */
+    header, main, footer{position:relative; z-index:var(--z-content)}
 
     .container{width:min(var(--maxw), calc(100vw - var(--container))); margin:0 auto}
     header{position:sticky; top:0; z-index:40; border-bottom:1px solid rgba(255,255,255,.06);
@@ -33,7 +41,7 @@
     nav a:hover{opacity:1}
     .btn{display:inline-block; padding:10px 14px; border-radius:999px; background:linear-gradient(135deg,var(--brand),var(--brand2)); color:#061018; font-weight:700; box-shadow:var(--shadow); text-decoration:none}
 
-    .hero{position:relative; padding: clamp(24px, 7vw, 72px) 0}
+    .hero{position:relative; padding: clamp(28px, 8vw, 90px) 0}
     .hero-grid{display:grid; grid-template-columns: 1.2fr .8fr; gap:var(--gap); align-items:center}
     .hero h1{font-size: clamp(30px, 5vw, 64px); line-height:1.08; margin:0 0 8px}
     .hero p{color:var(--muted); margin:0}
@@ -41,9 +49,9 @@
     .card.pad{padding: clamp(14px, 2vw, 22px)}
     .avatar{width:140px; height:140px; border-radius:24px; object-fit:cover; box-shadow:var(--shadow); border:1px solid rgba(255,255,255,.08); display:block; margin-bottom:12px}
 
-    /* BANNIÈRE PLUS PETITE */
-    .banner{position:relative; overflow:hidden; border-radius:var(--radius); border:1px solid rgba(255,255,255,.06); height:clamp(160px,26vh,360px)}
-    .banner img{width:100%; height:100%; object-fit:cover; opacity:.35; transform:none}
+    /* Bannière réduite */
+    .banner{position:relative; overflow:hidden; border-radius:var(--radius); border:1px solid rgba(255,255,255,.06); max-height:clamp(160px,26vh,360px)}
+    .banner img{width:100%; height:100%; object-fit:cover; display:block; transform:translateZ(0) scale(1.02); opacity:.3}
     .banner::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.45))}
 
     section{padding: clamp(28px,6vw,72px) 0}
@@ -75,16 +83,15 @@
 
     footer{padding: 36px 0; color: var(--muted)}
 
-    /* ICÔNE SECRÈTE AU-DESSUS DE TOUT */
-    .secret-icon{position:fixed; bottom:14px; right:14px; width:32px; height:32px; z-index:9999;
-      opacity:.2; filter:grayscale(0.3); pointer-events:none; transition:opacity .4s ease, transform .25s ease, filter .3s ease; transform:translateZ(0)}
+    .secret-icon{position:fixed; bottom:14px; right:14px; width:32px; height:32px; z-index:var(--z-egg);
+      opacity:.12; filter:grayscale(0.3); pointer-events:none; transition:opacity .4s ease, transform .25s ease, filter .3s ease}
     .secret-icon.ready{opacity:1; filter:none; pointer-events:auto}
     .secret-icon:hover{transform:scale(1.06) rotate(5deg)}
   </style>
 </head>
 <body>
-  <canvas id="bgfx"></canvas>
-  <canvas id="walker"></canvas>
+  <canvas id="bgfx" aria-hidden="true"></canvas>
+  <canvas id="walker" aria-hidden="true"></canvas>
 
   <header>
     <div class="container nav">
@@ -104,7 +111,7 @@
     <section class="hero">
       <div class="container">
         <div class="banner reveal">
-          <img src="Banniere.png" alt="Bannière — Portfolio de Nicolas Krasnoholowy" decoding="async">
+          <img src="Banniere.png" alt="Bannière — Portfolio de Nicolas Krasnoholowy">
         </div>
         <div class="hero-grid" id="apropos">
           <div class="reveal">
@@ -115,7 +122,7 @@
             </div>
           </div>
           <div class="card pad reveal">
-            <img src="portrait.png" alt="Portrait de Nicolas Krasnoholowy" class="avatar" loading="lazy" decoding="async" />
+            <img src="portrait.png" alt="Portrait de Nicolas Krasnoholowy" class="avatar" />
             <h3 style="margin:6px 0 6px">À propos</h3>
             <p>Je suis <strong>Nicolas Krasnoholowy</strong>, artiste visuel 2D/3D. Co-fondateur d'<strong>Owl Castle Games</strong>, j'ai présenté <em>Ymenok Reborn</em> à la Paris Games Week et Japan Expo. Outils: UE5, Blender/Maya, ZBrush, Substance, Quixel, Photoshop, ComfyUI.</p>
             <p style="margin:0"><a class="btn" href="CV_FR_dark_compact_banner_SMALL_projects_UPDATED.pdf" target="_blank" rel="noopener noreferrer">📄 Voir mon CV</a></p>
@@ -139,35 +146,35 @@
       <h2 class="title">Projets & Réalisations</h2>
       <div class="grid">
         <a class="tile" href="https://gamma.app/docs/Realisation-dun-point-de-vue-immersif-c6phyifpc431cir?mode=doc" target="_blank" rel="noopener noreferrer">
-          <div class="media"><img src="pdvi.png" alt="Réalisation d’un point de vue immersif" loading="lazy" decoding="async"></div>
+          <div class="media"><img src="pdvi.png" alt="Réalisation d’un point de vue immersif" loading="lazy"></div>
           <div class="meta"><span class="badge">Lighting</span><span class="badge">Composition</span><div>Étude DA, cadrage & atmosphères.</div></div>
         </a>
         <a class="tile" href="https://gamma.app/docs/Realisation-dun-diorama-enneige-xglq8tawzlubawy?mode=doc" target="_blank" rel="noopener noreferrer">
-          <div class="media"><img src="diorama.png" alt="Réalisation d’un diorama enneigé" loading="lazy" decoding="async"></div>
+          <div class="media"><img src="diorama.png" alt="Réalisation d’un diorama enneigé" loading="lazy"></div>
           <div class="meta"><span class="badge">Shaders</span><span class="badge">Matériaux</span><div>Neige stylisée, storytelling.</div></div>
         </a>
         <a class="tile" href="https://gamma.app/docs/Crown-Of-Hispania-n7b964nkllbi9gf?mode=doc" target="_blank" rel="noopener noreferrer">
-          <div class="media"><img src="strategie.png" alt="Crown of Hispania" loading="lazy" decoding="async"></div>
+          <div class="media"><img src="strategie.png" alt="Crown of Hispania" loading="lazy"></div>
           <div class="meta"><span class="badge">UI</span><span class="badge">Systèmes</span><div>Prototype stratégie — wireframes + UI.</div></div>
         </a>
         <a class="tile" href="https://owlcastlegames.itch.io/ymenok-reborn" target="_blank" rel="noopener noreferrer">
-          <div class="media"><img src="Ymenok.png" alt="Ymenok Reborn FPS" loading="lazy" decoding="async"></div>
+          <div class="media"><img src="Ymenok.png" alt="Ymenok Reborn FPS" loading="lazy"></div>
           <div class="meta"><span class="badge">Unreal</span><span class="badge">Gameplay</span><div>FPS narratif — prototypage, level art.</div></div>
         </a>
         <a class="tile" href="Rift.html" target="_blank" rel="noopener noreferrer">
-          <div class="media"><img src="lambda.png" alt="Mod Half-Life — Discover of the Rift" loading="lazy" decoding="async"></div>
+          <div class="media"><img src="lambda.png" alt="Mod Half-Life — Discover of the Rift" loading="lazy"></div>
           <div class="meta"><span class="badge">Level Design</span><span class="badge">Scripting</span><div>HL Mod — 42 maps, narration env.</div></div>
         </a>
         <a class="tile" href="#" target="_blank" rel="noopener noreferrer">
-          <div class="media"><img src="RelicRumble.png" alt="Relic Rumble — Metal Slug Like" loading="lazy" decoding="async"></div>
+          <div class="media"><img src="RelicRumble.png" alt="Relic Rumble — Metal Slug Like" loading="lazy"></div>
           <div class="meta"><span class="badge">Pixel</span><span class="badge">Game Feel</span><div>Run & gun — DA, anims, protos.</div></div>
         </a>
         <a class="tile" href="#" target="_blank" rel="noopener noreferrer">
-          <div class="media"><img src="fangame.png" alt="Fangame Sonic" loading="lazy" decoding="async"></div>
+          <div class="media"><img src="fangame.png" alt="Fangame Sonic" loading="lazy"></div>
           <div class="meta"><span class="badge">Prototype</span><span class="badge">Physique</span><div>Sonic MechaDrive — momentum.</div></div>
         </a>
         <a class="tile" href="#" target="_blank" rel="noopener noreferrer">
-          <div class="media"><img src="Panda.png" alt="Pandamour — projet livre illustré" loading="lazy" decoding="async"></div>
+          <div class="media"><img src="Panda.png" alt="Pandamour — projet livre illustré" loading="lazy"></div>
           <div class="meta"><span class="badge">Illustration</span><span class="badge">Narration</span><div>Pandamour — réalisme stylisé.</div></div>
         </a>
       </div>
@@ -177,22 +184,22 @@
       <h2 class="title">Logiciels & Outils</h2>
       <div class="softwrap">
         <div class="softstrip">
-          <img src="ue.png" alt="Unreal Engine" loading="lazy" decoding="async"/>
-          <img src="bl.png" alt="Blender" loading="lazy" decoding="async"/>
-          <img src="maya.png" alt="Maya" loading="lazy" decoding="async"/>
-          <img src="3dsmax.webp" alt="3ds Max" loading="lazy" decoding="async"/>
-          <img src="zbrush.png" alt="ZBrush" loading="lazy" decoding="async"/>
-          <img src="adobe.png" alt="Adobe Suite" loading="lazy" decoding="async"/>
-          <img src="quill.webp" alt="Quill" loading="lazy" decoding="async"/>
-          <img src="ComfyUi.png" alt="ComfyUI" loading="lazy" decoding="async"/>
-          <img src="ue.png" alt="Unreal Engine" loading="lazy" decoding="async"/>
-          <img src="bl.png" alt="Blender" loading="lazy" decoding="async"/>
-          <img src="maya.png" alt="Maya" loading="lazy" decoding="async"/>
-          <img src="3dsmax.webp" alt="3ds Max" loading="lazy" decoding="async"/>
-          <img src="zbrush.png" alt="ZBrush" loading="lazy" decoding="async"/>
-          <img src="adobe.png" alt="Adobe Suite" loading="lazy" decoding="async"/>
-          <img src="quill.webp" alt="Quill" loading="lazy" decoding="async"/>
-          <img src="ComfyUi.png" alt="ComfyUI" loading="lazy" decoding="async"/>
+          <img src="ue.png" alt="Unreal Engine" loading="lazy"/>
+          <img src="bl.png" alt="Blender" loading="lazy"/>
+          <img src="maya.png" alt="Maya" loading="lazy"/>
+          <img src="3dsmax.webp" alt="3ds Max" loading="lazy"/>
+          <img src="zbrush.png" alt="ZBrush" loading="lazy"/>
+          <img src="adobe.png" alt="Adobe Suite" loading="lazy"/>
+          <img src="quill.webp" alt="Quill" loading="lazy"/>
+          <img src="ComfyUi.png" alt="ComfyUI" loading="lazy"/>
+          <img src="ue.png" alt="Unreal Engine" loading="lazy"/>
+          <img src="bl.png" alt="Blender" loading="lazy"/>
+          <img src="maya.png" alt="Maya" loading="lazy"/>
+          <img src="3dsmax.webp" alt="3ds Max" loading="lazy"/>
+          <img src="zbrush.png" alt="ZBrush" loading="lazy"/>
+          <img src="adobe.png" alt="Adobe Suite" loading="lazy"/>
+          <img src="quill.webp" alt="Quill" loading="lazy"/>
+          <img src="ComfyUi.png" alt="ComfyUI" loading="lazy"/>
         </div>
       </div>
     </section>
@@ -211,7 +218,7 @@
       <h2 class="title">Archives & CV</h2>
       <div class="grid">
         <a class="tile" style="grid-column:span 6" href="https://krasnoholowy.wixsite.com/nico/" target="_blank" rel="noopener noreferrer">
-          <div class="media"><img src="archives.png" alt="Anciens travaux 2012–2016" loading="lazy" decoding="async"></div>
+          <div class="media"><img src="archives.png" alt="Anciens travaux 2012–2016" loading="lazy"></div>
           <div class="meta"><span class="badge">Archive</span><span class="badge">Book</span><div>Ancien book (2012–2016) — Wix.</div></div>
         </a>
         <div class="card pad reveal" style="grid-column:span 6">
@@ -233,7 +240,7 @@
     <footer class="container"><small>© <span id="year"></span> Nicolas Krasnoholowy — Portfolio</small></footer>
   </main>
 
-  <a href="secret.html" class="secret-icon" id="secretEgg" title="…" aria-label="Accès secret"><img src="Icon.ico" alt="Accès secret"></a>
+  <a href="secret.html" class="secret-icon" id="secretEgg" title="…" aria-label="Accès secret"><img src="Icon.ico" alt="Accès secret" width="32" height="32"></a>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
@@ -245,7 +252,7 @@
       const c=document.getElementById('bgfx'); const x=c.getContext('2d');
       const DPR=Math.max(1, devicePixelRatio||1);
       let W,H, mx=-999, my=-999;
-      let pts=[], pops=[], feed=0, targetFeed=60, eatCooldown=0; // targetFeed un peu plus bas pour mieux voir la progression
+      let pts=[], pops=[], feed=0, targetFeed=80, eatCooldown=0;
 
       function spawn(){ // particle
         return {x:Math.random()*W, y:Math.random()*H, r:1.2+Math.random()*1.6,
@@ -275,14 +282,11 @@
         const dx=mx-p.x, dy=my-p.y, d=Math.hypot(dx,dy)||1;
         if(d<140){ p.active=true; p.actTimer=2; }
         if(p.actTimer>0){ p.actTimer-=dt; if(p.actTimer<=0) p.active=false; }
-
         p.vx += (Math.random()-.5)*0.02;
         p.vy += (Math.random()-.5)*0.02;
-
         const pull = Math.max(0, 120 - d) / 120;
         p.vx += (dx/d)*pull*0.5;
         p.vy += (dy/d)*pull*0.5;
-
         const {cx,cy} = getMouth();
         const dcx=cx-p.x, dcy=cy-p.y, dc=Math.hypot(dcx,dcy)||1;
         const lane = 120;
@@ -290,11 +294,9 @@
           p.vx += (dcx/dc)*1.3;
           p.vy += (dcy/dc)*1.3;
         }
-
         p.vx*=0.992; p.vy*=0.992;
         p.x += p.vx; p.y += p.vy;
         if(p.x<0)p.x+=W; if(p.x>W)p.x-=W; if(p.y<0)p.y+=H; if(p.y>H)p.y-=H;
-
         const eatR = 20;
         if(eatCooldown<=0 && p.active && Math.hypot(p.x-cx, p.y-cy) < eatR){
           window.chameleonMunch && window.chameleonMunch();
@@ -306,17 +308,17 @@
       }
 
       function draw(){
-        x.clearRect(0,0,W,H);
-        x.fillStyle='#0b0e13'; x.fillRect(0,0,W,H);
+        const x2=x; x2.clearRect(0,0,W,H);
+        x2.fillStyle='#0b0e13'; x2.fillRect(0,0,W,H);
         for(const p of pts){
-          const g=x.createRadialGradient(p.x-p.r*0.4,p.y-p.r*0.4,1,p.x,p.y,p.r*1.2);
+          const g=x2.createRadialGradient(p.x-p.r*0.4,p.y-p.r*0.4,1,p.x,p.y,p.r*1.2);
           if(p.active){ g.addColorStop(0,'rgba(134,197,255,.95)'); g.addColorStop(1,'rgba(94,225,192,.18)'); }
           else{ g.addColorStop(0,'rgba(134,197,255,.65)'); g.addColorStop(1,'rgba(94,225,192,.08)'); }
-          x.fillStyle=g; x.beginPath(); x.arc(p.x,p.y,p.r,0,6.283); x.fill();
+          x2.fillStyle=g; x2.beginPath(); x2.arc(p.x,p.y,p.r,0,6.283); x2.fill();
         }
         for(const q of pops){
           const t=q.life/0.22; const alpha=t; const radius = (1-t)*10;
-          x.strokeStyle=`rgba(134,197,255,${alpha})`; x.lineWidth=1.6; x.beginPath(); x.arc(q.x,q.y,radius,0,6.283); x.stroke();
+          x2.strokeStyle=`rgba(134,197,255,${alpha})`; x2.lineWidth=1.6; x2.beginPath(); x2.arc(q.x,q.y,radius,0,6.283); x2.stroke();
         }
       }
 
@@ -329,7 +331,7 @@
         for(let i=pops.length-1;i>=0;i--){ pops[i].life -= dt; if(pops[i].life<=0) pops.splice(i,1); }
         draw();
         const progress = feed/targetFeed;
-        if(egg){ egg.style.opacity = Math.max(.2, 0.1 + progress*0.9); if(progress>=1) egg.classList.add('ready'); }
+        if(egg){ egg.style.opacity = Math.max(.12, progress); if(progress>=1) egg.classList.add('ready'); }
         requestAnimationFrame(loop);
       }
       loop();
@@ -346,8 +348,8 @@
         x.fillStyle='#5ee1c0'; x.beginPath(); x.ellipse(0,0,20,12,0,0,6.283); x.fill();
         x.fillStyle='#86c5ff'; x.beginPath(); x.ellipse(14,-5,12,9,0,0,6.283); x.fill();
         if(munch>0){ const t=Math.min(1,munch/0.18); const L=10+26*(1-t*t); x.fillStyle='#ff6b89'; x.fillRect(14,-5,L,3); }
-        x.fillStyle='#fff'; x.beginPath(); x.arc(18,-6,4,0,6.283); x.fill(); x.fillStyle:'#000'; x.beginPath(); x.arc(18,-6,1.8,0,6.283); x.fill();
-        x.fillStyle:'#4dd5b6'; x.fillRect(-10,10,8,4); x.fillRect(6,10,8,4);
+        x.fillStyle='#fff'; x.beginPath(); x.arc(18,-6,4,0,6.283); x.fill(); x.fillStyle='#000'; x.beginPath(); x.arc(18,-6,1.8,0,6.283); x.fill();
+        x.fillStyle='#4dd5b6'; x.fillRect(-10,10,8,4); x.fillRect(6,10,8,4);
         x.restore();
       }
       function loop(now){ const dt=Math.min(0.033,(now-last)/1000); last=now;
