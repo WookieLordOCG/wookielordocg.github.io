@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Nicolas Krasnoholowy — CV (FR)</title>
+<style>
+  :root{
+    --bg:#0b0b0d;
+    --card:#111114;
+    --ink:#f2f2f2;
+    --muted:#b7b9c0;
+    --accent:#7af0c8;
+    --line:#24242a;
+    --chip:#1a1a1f;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,"Noto Sans",sans-serif;line-height:1.55}
+  .wrap{max-width:1000px;margin:0 auto;padding:28px 22px 60px}
+  header{
+    border-radius:20px;
+    overflow:hidden;
+    background:
+      radial-gradient(1200px 400px at 10% -20%, #1f2a40 0%, transparent 50%),
+      radial-gradient(1200px 400px at 110% -30%, #0f3c2f 0%, transparent 55%),
+      linear-gradient(135deg, #101319, #0c0f14);
+    position:relative;
+    padding:32px 28px 28px;
+    border:1px solid var(--line);
+    box-shadow:0 10px 40px rgba(0,0,0,.35);
+  }
+  header h1{margin:0;font-size:34px;letter-spacing:.3px}
+  header p.role{margin:6px 0 14px;color:var(--muted);font-weight:600}
+  .row{display:flex;flex-wrap:wrap;gap:18px}
+  .pill{background:rgba(122,240,200,.08);color:var(--accent);padding:8px 12px;border:1px solid rgba(122,240,200,.25);border-radius:999px;font-size:13px}
+  .grid{display:grid;grid-template-columns:280px 1fr;gap:22px;margin-top:22px}
+  @media (max-width:860px){.grid{grid-template-columns:1fr}}
+  section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 18px 8px}
+  h2{font-size:18px;margin:0 0 10px 0;color:#e8e8ea;letter-spacing:.2px}
+  .item{padding:12px 10px;border-top:1px solid var(--line)}
+  .item:first-child{border-top:0}
+  .when{color:var(--muted);font-size:13px;margin-left:6px}
+  .title{font-weight:700}
+  .place{color:var(--muted)}
+  .bullets{margin:8px 0 0 0;padding-left:18px}
+  .bullets li{margin:6px 0}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .chip{background:var(--chip);border:1px solid var(--line);padding:6px 10px;border-radius:999px;font-size:13px;color:#e6e6ea}
+  .tools-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+  .tools-list .chip{border-color:#2a2a31}
+  a{color:var(--accent);text-decoration:none}
+  footer{color:var(--muted);font-size:12px;margin-top:16px;text-align:center}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Nicolas Krasnoholowy</h1>
+      <p class="role">Concepteur pluridisciplinaire · Artiste 3D / Interactif (Unreal Engine)</p>
+      <div class="row">
+        <span class="pill">Paris, France · Teletravail bienvenu</span>
+        <span class="pill"><a href="mailto:krasnoholowy@gmail.com">krasnoholowy@gmail.com</a></span>
+        <span class="pill"><a href="tel:+33766099984">+33 7 66 09 99 84</a></span>
+        <span class="pill"><a href="https://wookielordocg.github.io/" target="_blank">Portfolio</a></span>
+        <span class="pill"><a href="https://github.com/wookielordocg" target="_blank">GitHub</a></span>
+      </div>
+    </header>
+
+    <div class="grid">
+      <section>
+        <h2>Profil</h2>
+        <div class="item">
+          Artiste 3D et game designer polyvalent, culture prototypage forte.
+          Fondateur d’<strong>Owl Castle Games</strong>. Direction artistique et technique sur
+          <strong>Ymenok Reborn</strong> — presente a la Paris Games Week, Japan Expo et d’autres salons.
+          Projet solo en cours sous Unreal Engine 5 (Blueprints, systemes, FX).
+        </div>
+
+        <h2>Outils • • • • • •</h2>
+        <div class="tools-list">
+          <span class="chip">Unreal Engine 5 (Blueprints)</span>
+          <span class="chip">Maya</span>
+          <span class="chip">3ds Max</span>
+          <span class="chip">ZBrush</span>
+          <span class="chip">Substance Painter</span>
+          <span class="chip">Photoshop</span>
+          <span class="chip">Premiere Pro</span>
+          <span class="chip">ComfyUI</span>
+          <span class="chip">ChatGPT</span>
+          <span class="chip">Python</span>
+        </div>
+
+        <h2>Competences</h2>
+        <div class="chips">
+          <span class="chip">3D stylisee & realiste</span>
+          <span class="chip">Prototypage gameplay</span>
+          <span class="chip">Tech art & shaders</span>
+          <span class="chip">Blocking / layout (VR Quill)</span>
+          <span class="chip">Optimisation & profiling</span>
+          <span class="chip">Texturing PBR</span>
+          <span class="chip">Game feel & iteration</span>
+        </div>
+      </section>
+
+      <section>
+        <h2>Experiences</h2>
+
+        <div class="item">
+          <div class="title">Fondateur / Artiste 3D & Game Designer — Owl Castle Games
+            <span class="when">2016–2020</span>
+          </div>
+          <div class="place">Paris, France</div>
+          <ul class="bullets">
+            <li>Direction artistique, production 3D et integration gameplay sur <em>Ymenok Reborn</em>.</li>
+            <li>Presentation du jeu a des salons majeurs (PGW, Japan Expo, etc.).</li>
+            <li>Protos iteratifs; FX, animation, UI et level design.</li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <div class="title">Conseiller Ventes — Nature &amp; Decouvertes
+            <span class="when">2014–2018</span>
+          </div>
+          <div class="place">Ile-de-France, France</div>
+          <ul class="bullets">
+            <li>Relation client, decouverte du besoin et recommandation de solutions.</li>
+            <li>Organisation des flux en periodes de pointe; formation des nouveaux.</li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <div class="title">Saisonnier — Disneyland Paris
+            <span class="when">2009 &amp; 2010</span>
+          </div>
+          <div class="place">Marne-la-Vallee, France</div>
+          <ul class="bullets">
+            <li>Experience invite exigeante; travail en equipe rythme.</li>
+          </ul>
+        </div>
+
+        <h2>Projets</h2>
+        <div class="item">
+          <div class="title">Cassette — Jeu en developpement (Unreal Engine)</div>
+          <ul class="bullets">
+            <li>Modelisation personnages, recherches chara, storyboard, level design, direction artistique.</li>
+            <li>Utilisation et reapproriation du template AGLS pour un platformer TPS (inspiration Uncharted).</li>
+            <li>Photographie de paysage et scenographie au service des environnements.</li>
+          </ul>
+        </div>
+        <div class="item">
+          <div class="title">Livre illustre — En cours</div>
+          <ul class="bullets">
+            <li>Livre pour enfants, style semi‑realiste chaleureux; chara design coherent (panda roux).</li>
+            <li>Pipeline croquis → rough 3D → rendu stylise, iterations guidees par IA (ComfyUI).</li>
+          </ul>
+        </div>
+        <div class="item">
+          <div class="title">Projet solo UE5 (en developpement)</div>
+          <ul class="bullets">
+            <li>Exploration + systemes emergents; Blueprints gameplay; Niagara FX; DA stylisee.</li>
+          </ul>
+        </div>
+        <div class="item">
+          <div class="title">Ymenok Reborn (prototype / salons)</div>
+          <ul class="bullets">
+            <li>Prototype action‑narratif presente sur salons; pipeline artistique & technique.</li>
+          </ul>
+        </div>
+
+        <h2>Formation</h2>
+        <div class="item"><div class="title">Cycle long Design 3D — e‑tribart</div></div>
+        <div class="item"><div class="title">BTS Audiovisuel — Montage / Postproduction</div></div>
+        <div class="item"><div class="title">Annees preparatoires — LISAA</div></div>
+        <div class="item"><div class="title">Bac STI Arts Appliques</div></div>
+        <div class="item"><div class="title">Autodidacte : dev jeu, 3D, IA generative, narration</div></div>
+
+        <h2>Langues</h2>
+        <div class="item">
+          <div class="title">Francais — langue maternelle · Anglais — professionnel</div>
+        </div>
+      </section>
+    </div>
+
+    <footer>Mis a jour en 2025. © Nicolas Krasnoholowy</footer>
+  </div>
+</body>
+</html>
