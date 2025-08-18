@@ -13,22 +13,15 @@
       --brand:#86c5ff; --brand2:#5ee1c0; --ring:rgba(134,197,255,.25);
       --radius:18px; --radius-sm:12px; --shadow:0 16px 44px rgba(0,0,0,.45);
       --gap:clamp(16px,2vw,28px); --container:max(72px, 4vw); --maxw:1280px;
-      /* z-index map */
-      --z-bg:-2;        /* arrière-plan (canvas) */
-      --z-content:2;    /* contenu principal */
-      --z-walker:5;     /* petit caméléon */
-      --z-egg:9999;     /* icône secrète au-dessus de tout */
+      --z-bg:-2; --z-content:2; --z-walker:5; --z-egg:9999;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{margin:0; font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial;
          background:var(--bg); color:var(--text); line-height:1.65; overflow-x:hidden}
 
-    /* Canvases correctement placés derrière le contenu */
     #bgfx{position:fixed; inset:0; z-index:var(--z-bg); pointer-events:none}
     #walker{position:fixed; left:0; right:0; bottom:0; height:84px; width:100vw; pointer-events:none; z-index:var(--z-walker)}
-
-    /* S'assurer que tout le contenu est au-dessus du fond */
     header, main, footer{position:relative; z-index:var(--z-content)}
 
     .container{width:min(var(--maxw), calc(100vw - var(--container))); margin:0 auto}
@@ -49,7 +42,6 @@
     .card.pad{padding: clamp(14px, 2vw, 22px)}
     .avatar{width:140px; height:140px; border-radius:24px; object-fit:cover; box-shadow:var(--shadow); border:1px solid rgba(255,255,255,.08); display:block; margin-bottom:12px}
 
-    /* Bannière réduite */
     .banner{position:relative; overflow:hidden; border-radius:var(--radius); border:1px solid rgba(255,255,255,.06); max-height:clamp(160px,26vh,360px)}
     .banner img{width:100%; height:100%; object-fit:cover; display:block; transform:translateZ(0) scale(1.02); opacity:.3}
     .banner::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.45))}
@@ -82,11 +74,18 @@
     .reveal.is-visible{opacity:1; transform:none}
 
     footer{padding: 36px 0; color: var(--muted)}
-
     .secret-icon{position:fixed; bottom:14px; right:14px; width:32px; height:32px; z-index:var(--z-egg);
       opacity:.12; filter:grayscale(0.3); pointer-events:none; transition:opacity .4s ease, transform .25s ease, filter .3s ease}
     .secret-icon.ready{opacity:1; filter:none; pointer-events:auto}
     .secret-icon:hover{transform:scale(1.06) rotate(5deg)}
+
+    /* --- AJOUT: styles légers pour l'onglet CV --- */
+    .seg{display:inline-flex; background:rgba(255,255,255,.06); padding:4px; border-radius:999px; border:1px solid rgba(255,255,255,.08)}
+    .seg .tab{border:0; background:transparent; color:var(--text); padding:8px 14px; border-radius:999px; cursor:pointer; font-weight:700; opacity:.75}
+    .seg .tab.active{background:linear-gradient(135deg,var(--brand),var(--brand2)); color:#061018; opacity:1}
+    .cv-actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+    .btn-ghost{display:inline-block; padding:10px 14px; border-radius:999px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.04); color:var(--text); text-decoration:none}
+    .cv-frame{width:100%; border:1px solid rgba(255,255,255,.08); border-radius:var(--radius); background:var(--panel); height:1200px; box-shadow:var(--shadow)}
   </style>
 </head>
 <body>
@@ -101,6 +100,7 @@
         <a href="#projets">Projets</a>
         <a href="#videos">Vidéos</a>
         <a href="#outils">Outils</a>
+        <a href="#cv">CV</a><!-- AJOUT -->
         <a href="#archives">Archives</a>
         <a class="btn" href="#contact">Me contacter</a>
       </nav>
@@ -118,14 +118,18 @@
             <h1>Artiste 2D/3D & Unreal Engine</h1>
             <p>Création d'univers immersifs, narration visuelle, environnements 3D, prototypage gameplay. Basé à Paris.</p>
             <div class="card pad" style="margin-top:14px">
-              <strong>Services</strong> — level art & lighting, intégration Blueprint, optimisation, UI/UX gameplay, protos R&D.
+              <strong>Services</strong> — level art & lighting, intégration Blueprint, optimisation, UI/UX gameplay, protos R&amp;D.
             </div>
           </div>
           <div class="card pad reveal">
             <img src="portrait.png" alt="Portrait de Nicolas Krasnoholowy" class="avatar" />
             <h3 style="margin:6px 0 6px">À propos</h3>
             <p>Je suis <strong>Nicolas Krasnoholowy</strong>, artiste visuel 2D/3D. Co-fondateur d'<strong>Owl Castle Games</strong>, j'ai présenté <em>Ymenok Reborn</em> à la Paris Games Week et Japan Expo. Outils: UE5, Blender/Maya, ZBrush, Substance, Quixel, Photoshop, ComfyUI.</p>
-            <p style="margin:0"><a class="btn" href="CV_FR_dark_compact_banner_SMALL_projects_UPDATED.pdf" target="_blank" rel="noopener noreferrer">📄 Voir mon CV</a></p>
+            <p style="margin:0; display:flex; gap:8px; flex-wrap:wrap">
+              <a class="btn-ghost" href="cv_fr_black.html" target="_blank" rel="noopener noreferrer">CV FR (HTML)</a>
+              <a class="btn-ghost" href="cv_en_black.html" target="_blank" rel="noopener noreferrer">Resume EN (HTML)</a>
+              <a class="btn" href="CV_FR_dark_compact_banner_SMALL_projects_UPDATED.pdf" target="_blank" rel="noopener noreferrer">📄 PDF</a>
+            </p>
           </div>
         </div>
       </div>
@@ -204,6 +208,23 @@
       </div>
     </section>
 
+    <!-- === NOUVELLE SECTION CV intégré === -->
+    <section id="cv" class="container reveal">
+      <h2 class="title">CV / Resume (HTML)</h2>
+      <div class="card pad" style="display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:14px">
+        <div class="cv-actions">
+          <div class="seg" role="tablist" aria-label="CV language">
+            <button id="cv_fr_btn" class="tab active" role="tab" aria-selected="true">FR</button>
+            <button id="cv_en_btn" class="tab" role="tab" aria-selected="false">EN</button>
+          </div>
+          <a class="btn-ghost" href="cv_fr_black.html" target="_blank" rel="noopener">Ouvrir FR dans un onglet</a>
+          <a class="btn-ghost" href="cv_en_black.html" target="_blank" rel="noopener">Open EN in new tab</a>
+        </div>
+        <small style="color:var(--muted)">Astuce: ces pages HTML contiennent la version complete (outils, formations, langues…).</small>
+      </div>
+      <iframe id="cvFrame" class="cv-frame" src="cv_fr_black.html" title="CV de Nicolas Krasnoholowy"></iframe>
+    </section>
+
     <section id="videos" class="container reveal">
       <h2 class="title">Démos & vidéos</h2>
       <div class="links">
@@ -247,66 +268,36 @@
     const io = new IntersectionObserver((entries)=>{ for(const e of entries){ if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target);} } }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-    // Single-canvas background = edible particles
+    // ---- BG edible particles (inchangé) ----
     (function(){
       const c=document.getElementById('bgfx'); const x=c.getContext('2d');
       const DPR=Math.max(1, devicePixelRatio||1);
       let W,H, mx=-999, my=-999;
       let pts=[], pops=[], feed=0, targetFeed=80, eatCooldown=0;
-
-      function spawn(){ // particle
-        return {x:Math.random()*W, y:Math.random()*H, r:1.2+Math.random()*1.6,
-                vx:(Math.random()-.5)*.22, vy:(Math.random()-.5)*.22,
-                active:false, actTimer:0};
-      }
-      function resize(){
-        W=innerWidth; H=innerHeight;
-        c.width=W*DPR; c.height=H*DPR; c.style.width=W+'px'; c.style.height=H+'px';
-        x.setTransform(DPR,0,0,DPR,0,0);
-        const count=Math.round(Math.min(200, W*H/9000));
-        pts = Array.from({length:count}, spawn);
-      }
+      function spawn(){ return {x:Math.random()*W, y:Math.random()*H, r:1.2+Math.random()*1.6,
+                vx:(Math.random()-.5)*.22, vy:(Math.random()-.5)*.22, active:false, actTimer:0}; }
+      function resize(){ W=innerWidth; H=innerHeight; c.width=W*DPR; c.height=H*DPR; c.style.width=W+'px'; c.style.height=H+'px';
+        x.setTransform(DPR,0,0,DPR,0,0); const count=Math.round(Math.min(200, W*H/9000)); pts = Array.from({length:count}, spawn); }
       addEventListener('resize', resize);
       addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; });
       resize();
-
-      function getMouth(){
-        const w = document.getElementById('walker');
-        const rect = w.getBoundingClientRect();
-        const cx = (window.chameleonX || W/2);
-        const cy = rect.bottom - 28;
-        return {cx, cy};
-      }
-
+      function getMouth(){ const w = document.getElementById('walker'); const rect = w.getBoundingClientRect();
+        const cx = (window.chameleonX || W/2); const cy = rect.bottom - 28; return {cx, cy}; }
       function tick(dt,p){
         const dx=mx-p.x, dy=my-p.y, d=Math.hypot(dx,dy)||1;
         if(d<140){ p.active=true; p.actTimer=2; }
         if(p.actTimer>0){ p.actTimer-=dt; if(p.actTimer<=0) p.active=false; }
-        p.vx += (Math.random()-.5)*0.02;
-        p.vy += (Math.random()-.5)*0.02;
-        const pull = Math.max(0, 120 - d) / 120;
-        p.vx += (dx/d)*pull*0.5;
-        p.vy += (dy/d)*pull*0.5;
-        const {cx,cy} = getMouth();
-        const dcx=cx-p.x, dcy=cy-p.y, dc=Math.hypot(dcx,dcy)||1;
-        const lane = 120;
-        if(p.active && p.y>H*0.72 && Math.abs(p.x-cx)<lane){
-          p.vx += (dcx/dc)*1.3;
-          p.vy += (dcy/dc)*1.3;
-        }
-        p.vx*=0.992; p.vy*=0.992;
-        p.x += p.vx; p.y += p.vy;
+        p.vx += (Math.random()-.5)*0.02; p.vy += (Math.random()-.5)*0.02;
+        const pull = Math.max(0, 120 - d) / 120; p.vx += (dx/d)*pull*0.5; p.vy += (dy/d)*pull*0.5;
+        const {cx,cy} = getMouth(); const dcx=cx-p.x, dcy=cy-p.y, dc=Math.hypot(dcx,dcy)||1;
+        const lane = 120; if(p.active && p.y>H*0.72 && Math.abs(p.x-cx)<lane){ p.vx += (dcx/dc)*1.3; p.vy += (dcy/dc)*1.3; }
+        p.vx*=0.992; p.vy*=0.992; p.x += p.vx; p.y += p.vy;
         if(p.x<0)p.x+=W; if(p.x>W)p.x-=W; if(p.y<0)p.y+=H; if(p.y>H)p.y-=H;
-        const eatR = 20;
-        if(eatCooldown<=0 && p.active && Math.hypot(p.x-cx, p.y-cy) < eatR){
-          window.chameleonMunch && window.chameleonMunch();
-          pops.push({x:p.x, y:p.y, life:0.22});
-          Object.assign(p, spawn()); p.y = -10;
-          feed = Math.min(targetFeed, feed+1);
-          eatCooldown = 0.12;
+        const eatR = 20; if(eatCooldown<=0 && p.active && Math.hypot(p.x-cx, p.y-cy) < eatR){
+          window.chameleonMunch && window.chameleonMunch(); pops.push({x:p.x, y:p.y, life:0.22});
+          Object.assign(p, spawn()); p.y = -10; feed = Math.min(targetFeed, feed+1); eatCooldown = 0.12;
         }
       }
-
       function draw(){
         const x2=x; x2.clearRect(0,0,W,H);
         x2.fillStyle='#0b0e13'; x2.fillRect(0,0,W,H);
@@ -321,7 +312,6 @@
           x2.strokeStyle=`rgba(134,197,255,${alpha})`; x2.lineWidth=1.6; x2.beginPath(); x2.arc(q.x,q.y,radius,0,6.283); x2.stroke();
         }
       }
-
       let last=performance.now();
       const egg=document.getElementById('secretEgg');
       function loop(now){
@@ -337,7 +327,7 @@
       loop();
     })();
 
-    // Chameleon walker
+    // ---- Chameleon walker (inchangé) ----
     (function(){
       const c=document.getElementById('walker'); const x=c.getContext('2d'); const DPR=Math.max(1,devicePixelRatio||1);
       let W,H; let dir=1; let pos=60; let last=performance.now(); let munch=0;
@@ -363,6 +353,39 @@
       }
       requestAnimationFrame(loop);
     })();
+
+    // ---- AJOUT: logique des onglets CV + auto-height iframe ----
+    (function(){
+      const frBtn = document.getElementById('cv_fr_btn');
+      const enBtn = document.getElementById('cv_en_btn');
+      const frame = document.getElementById('cvFrame');
+
+      function setLang(lang){
+        const src = (lang === 'en') ? 'cv_en_black.html' : 'cv_fr_black.html';
+        frame.src = src;
+        frBtn.classList.toggle('active', lang!=='en');
+        enBtn.classList.toggle('active', lang==='en');
+        frBtn.setAttribute('aria-selected', lang!=='en');
+        enBtn.setAttribute('aria-selected', lang==='en');
+      }
+      frBtn?.addEventListener('click', ()=>setLang('fr'));
+      enBtn?.addEventListener('click', ()=>setLang('en'));
+
+      function fitIframe(){
+        try{
+          const d = frame.contentWindow.document;
+          const h = Math.max(
+            d.body.scrollHeight,
+            d.documentElement.scrollHeight,
+            1000
+          );
+          frame.style.height = (h + 20) + 'px';
+        }catch(e){}
+      }
+      frame.addEventListener('load', fitIframe);
+      window.addEventListener('resize', ()=>setTimeout(fitIframe, 150));
+    })();
+
   </script>
 </body>
 </html>
