@@ -42,29 +42,28 @@
     .card.pad{padding: clamp(14px, 2vw, 22px)}
     .avatar{width:140px; height:140px; border-radius:24px; object-fit:cover; box-shadow:var(--shadow); border:1px solid rgba(255,255,255,.08); display:block; margin-bottom:12px}
 
-/* Bannière réduite */
-.banner{
-  position:relative;
-  overflow:hidden;
-  border-radius:var(--radius);
-  border:1px solid rgba(255,255,255,.06);
-  height:clamp(160px,26vh,360px);   /* même taille, fixe la hauteur */
-}
-.banner img{
-  width:100%;
-  height:100%;
-  object-fit:contain;               /* montre toute l'image */
-  object-position:center;
-  display:block;
-  transform:none;                   /* évite le crop dû au zoom */
-  opacity:.75;                      /* 25% de transparence */
-}
-.banner::after{
-  content:"";
-  position:absolute; inset:0;
-  background:linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.30));
-}
-
+    /* Bannière réduite */
+    .banner{
+      position:relative;
+      overflow:hidden;
+      border-radius:var(--radius);
+      border:1px solid rgba(255,255,255,.06);
+      height:clamp(160px,26vh,360px);
+    }
+    .banner img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      object-position:center;
+      display:block;
+      transform:none;
+      opacity:.75;
+    }
+    .banner::after{
+      content:"";
+      position:absolute; inset:0;
+      background:linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.30));
+    }
 
     section{padding: clamp(28px,6vw,72px) 0}
     .title{font-size: clamp(22px, 3.2vw, 32px); margin:0 0 14px}
@@ -99,7 +98,7 @@
     .secret-icon.ready{opacity:1; filter:none; pointer-events:auto}
     .secret-icon:hover{transform:scale(1.06) rotate(5deg)}
 
-    /* --- AJOUT: styles légers pour l'onglet CV --- */
+    /* --- Styles légers pour l'onglet CV --- */
     .seg{display:inline-flex; background:rgba(255,255,255,.06); padding:4px; border-radius:999px; border:1px solid rgba(255,255,255,.08)}
     .seg .tab{border:0; background:transparent; color:var(--text); padding:8px 14px; border-radius:999px; cursor:pointer; font-weight:700; opacity:.75}
     .seg .tab.active{background:linear-gradient(135deg,var(--brand),var(--brand2)); color:#061018; opacity:1}
@@ -118,9 +117,10 @@
       <nav style="display:flex; gap:12px; align-items:center">
         <a href="#apropos">À propos</a>
         <a href="#projets">Projets</a>
+        <a href="#mods">Fangames / Mods</a><!-- NEW -->
         <a href="#videos">Vidéos</a>
         <a href="#outils">Outils</a>
-        <a href="#cv">CV</a><!-- AJOUT -->
+        <a href="#cv">CV</a>
         <a href="#archives">Archives</a>
         <a class="btn" href="#contact">Me contacter</a>
       </nav>
@@ -169,6 +169,12 @@
     <section id="projets" class="container reveal">
       <h2 class="title">Projets & Réalisations</h2>
       <div class="grid">
+        <!-- NEW — Cassette personnage (Gamma) -->
+        <a class="tile" href="https://gamma.app/docs/Breakdown-Creation-du-Scaphandrier-CRT-ls3j6a668i2nt49" target="_blank" rel="noopener noreferrer">
+          <div class="media"><img src="CassettePerso.png" alt="Cassette — Breakdown création du scaphandrier CRT" loading="lazy"></div>
+          <div class="meta"><span class="badge">3D</span><span class="badge">Process</span><div>Breakdown perso — concept → sculpt → textures.</div></div>
+        </a>
+
         <a class="tile" href="https://gamma.app/docs/Realisation-dun-point-de-vue-immersif-c6phyifpc431cir?mode=doc" target="_blank" rel="noopener noreferrer">
           <div class="media"><img src="pdvi.png" alt="Réalisation d’un point de vue immersif" loading="lazy"></div>
           <div class="meta"><span class="badge">Lighting</span><span class="badge">Composition</span><div>Étude DA, cadrage & atmosphères.</div></div>
@@ -185,21 +191,28 @@
           <div class="media"><img src="Ymenok.png" alt="Ymenok Reborn FPS" loading="lazy"></div>
           <div class="meta"><span class="badge">Unreal</span><span class="badge">Gameplay</span><div>FPS narratif — prototypage, level art.</div></div>
         </a>
-        <a class="tile" href="Rift.html" target="_blank" rel="noopener noreferrer">
-          <div class="media"><img src="lambda.png" alt="Mod Half-Life — Discover of the Rift" loading="lazy"></div>
-          <div class="meta"><span class="badge">Level Design</span><span class="badge">Scripting</span><div>HL Mod — 42 maps, narration env.</div></div>
-        </a>
         <a class="tile" href="#" target="_blank" rel="noopener noreferrer">
           <div class="media"><img src="RelicRumble.png" alt="Relic Rumble — Metal Slug Like" loading="lazy"></div>
           <div class="meta"><span class="badge">Pixel</span><span class="badge">Game Feel</span><div>Run & gun — DA, anims, protos.</div></div>
         </a>
         <a class="tile" href="#" target="_blank" rel="noopener noreferrer">
-          <div class="media"><img src="fangame.png" alt="Fangame Sonic" loading="lazy"></div>
-          <div class="meta"><span class="badge">Prototype</span><span class="badge">Physique</span><div>Sonic MechaDrive — momentum.</div></div>
-        </a>
-        <a class="tile" href="#" target="_blank" rel="noopener noreferrer">
           <div class="media"><img src="Panda.png" alt="Pandamour — projet livre illustré" loading="lazy"></div>
           <div class="meta"><span class="badge">Illustration</span><span class="badge">Narration</span><div>Pandamour — réalisme stylisé.</div></div>
+        </a>
+      </div>
+    </section>
+
+    <!-- NEW SECTION -->
+    <section id="mods" class="container reveal">
+      <h2 class="title">Fangames / Mods</h2>
+      <div class="grid">
+        <a class="tile" href="Rift.html" target="_blank" rel="noopener noreferrer">
+          <div class="media"><img src="lambda.png" alt="Mod Half-Life — Discover of the Rift" loading="lazy"></div>
+          <div class="meta"><span class="badge">Level Design</span><span class="badge">Scripting</span><div>Half-Life — 42 maps, narration env.</div></div>
+        </a>
+        <a class="tile" href="https://youtu.be/Za5Tt6CSM2Q" target="_blank" rel="noopener noreferrer">
+          <div class="media"><img src="fangame.png" alt="Fangame Sonic MechaDrive" loading="lazy"></div>
+          <div class="meta"><span class="badge">Prototype</span><span class="badge">Physique</span><div>Sonic MechaDrive — momentum & loopings.</div></div>
         </a>
       </div>
     </section>
@@ -228,7 +241,7 @@
       </div>
     </section>
 
-    <!-- === NOUVELLE SECTION CV intégré === -->
+    <!-- === CV intégré === -->
     <section id="cv" class="container reveal">
       <h2 class="title">CV / Resume (HTML)</h2>
       <div class="card pad" style="display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:14px">
@@ -362,7 +375,7 @@
         x.fillStyle='#4dd5b6'; x.fillRect(-10,10,8,4); x.fillRect(6,10,8,4);
         x.restore();
       }
-      function loop(now){ const dt=Math.min(0.033,(now-last)/1000); last=now;
+      function loop(now){ const dt=Math.min(0.033,(now,last)/1000); last=now;
         x.clearRect(0,0,W,H); x.strokeStyle='rgba(134,197,255,.15)'; x.lineWidth=2; x.beginPath(); x.moveTo(0,H-12); x.lineTo(W,H-12); x.stroke();
         pos += dir * (100*dt); if(pos>W-40){ dir=-1 } if(pos<40){ dir=1 }
         if(munch>0){ munch-=dt; if(munch<0) munch=0; }
@@ -374,7 +387,7 @@
       requestAnimationFrame(loop);
     })();
 
-    // ---- AJOUT: logique des onglets CV + auto-height iframe ----
+    // ---- Onglets CV + auto-height iframe ----
     (function(){
       const frBtn = document.getElementById('cv_fr_btn');
       const enBtn = document.getElementById('cv_en_btn');
@@ -405,7 +418,6 @@
       frame.addEventListener('load', fitIframe);
       window.addEventListener('resize', ()=>setTimeout(fitIframe, 150));
     })();
-
   </script>
 </body>
 </html>
