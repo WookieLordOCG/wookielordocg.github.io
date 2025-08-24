@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sonic MechaDrive — Fangame (WIP)</title>
+  <meta name="description" content="Fangame Sonic MechaDrive — prototype UE5 : momentum, loopings, template jouable. Première zone en cours, projet en pause le temps d'une autre priorité." />
+  <link rel="icon" href="Icon.ico" type="image/x-icon" />
+  <style>
+    :root{
+      --bg:#0b0e13; --panel:#121722; --panel-2:#0e141f;
+      --text:#e8edf5; --muted:#9aa7bb; --brand:#86c5ff; --brand2:#5ee1c0;
+      --radius:18px; --shadow:0 16px 44px rgba(0,0,0,.45); --gap:clamp(16px,2vw,28px);
+      --container:max(72px, 4vw); --maxw:1280px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial;line-height:1.65}
+    a{color:var(--text)}
+    .container{width:min(var(--maxw), calc(100vw - var(--container))); margin:0 auto}
+    header{position:sticky; top:0; z-index:20; background:linear-gradient(180deg, rgba(10,12,18,.75), rgba(10,12,18,.45)); border-bottom:1px solid rgba(255,255,255,.06); backdrop-filter:blur(10px)}
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 0}
+    .btn{display:inline-block; padding:10px 14px; border-radius:999px; background:linear-gradient(135deg,var(--brand),var(--brand2)); color:#061018; font-weight:700; text-decoration:none; box-shadow:var(--shadow)}
+    .btn-ghost{display:inline-block; padding:10px 14px; border-radius:999px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.04); color:var(--text); text-decoration:none}
+    .badge{display:inline-block; font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.08); background:rgba(12,16,24,.6); margin-right:8px}
+    .banner{position:relative; overflow:hidden; border-radius:18px; border:1px solid rgba(255,255,255,.06); height:clamp(180px,32vh,440px); margin:18px 0}
+    .banner img{width:100%; height:100%; object-fit:cover; display:block}
+    .banner .overlay{position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.45));}
+    .grid{display:grid; grid-template-columns: repeat(12, 1fr); gap:var(--gap)}
+    .card{background:var(--panel); border:1px solid rgba(255,255,255,.06); border-radius:18px; box-shadow:var(--shadow)}
+    .pad{padding:clamp(14px, 2vw, 22px)}
+    .gallery{display:grid; grid-template-columns: repeat(12, 1fr); gap:var(--gap)}
+    .shot{grid-column:span 6; overflow:hidden; border-radius:14px; border:1px solid rgba(255,255,255,.06); background:var(--panel-2)}
+    .shot img{width:100%; height:100%; object-fit:cover; display:block}
+    @media (max-width: 980px){ .shot{grid-column:span 12} }
+    footer{padding:32px 0; color:#9aa7bb}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div style="font-weight:800; letter-spacing:.2px">Sonic MechaDrive — Fangame (WIP)</div>
+      <div style="display:flex; gap:10px; align-items:center">
+        <a class="btn-ghost" href="index.html">← Retour au portfolio</a>
+        <a class="btn" href="https://youtu.be/Za5Tt6CSM2Q" target="_blank" rel="noopener">▶ Watch WIP</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="banner card">
+      <!-- Héro: choisis un panoramique (ex: sonic_02.jpg) -->
+      <img src="sonic_02.jpg" alt="Sonic MechaDrive — Green Hill-like vista (UE5)">
+      <div class="overlay"></div>
+    </div>
+
+    <section class="grid" style="margin-bottom:var(--gap)">
+      <div class="card pad" style="grid-column: span 7">
+        <h1 style="margin:0 0 6px">Présentation</h1>
+        <p style="margin:0 0 12px; color:#9aa7bb">
+          <span class="badge">Fangame</span>
+          <span class="badge">UE5</span>
+          <span class="badge">Level Design</span>
+          <span class="badge">Physics</span>
+        </p>
+        <p>
+          <strong>MechaDrive</strong> est mon playground Sonic sous <b>Unreal Engine 5</b>.
+          J’ai reconstruit une <em>première section</em> de niveau façon “Green Hill”
+          pour tester <b>le momentum, les loopings, ressorts, rings et caméras</b>.
+        </p>
+        <p>
+          <b>État du projet :</b> la première zone est jouable et visuellement avancée,
+          mais le développement est <b>mis en pause</b> car j’ai une autre priorité de production.
+          Le cœur reste <b>fonctionnel</b> grâce à un <b>template maison modifié</b>, prêt à reprendre
+          quand j’aurai du temps.
+        </p>
+      </div>
+
+      <aside class="card pad" style="grid-column: span 5">
+        <h3 style="margin-top:0">Template & fonctionnalités</h3>
+        <ul style="margin:0; padding-left:18px">
+          <li>Physique avec conservation d’<b>inertie / momentum</b></li>
+          <li><b>Loopings / corkscrews</b> via spline & volumes d’alignement</li>
+          <li><b>Rings</b>, checkpoints, ressorts, dash panels</li>
+          <li>Caméra dynamique : close/medium/rail selon zones</li>
+          <li>Shader d’<b>eau</b> stylisé + particules de cascades</li>
+          <li>Post-process <b>RGB split</b> pour vibe rétro</li>
+          <li>Level streaming (intérieur grottes / extérieurs)</li>
+        </ul>
+        <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+          <a class="btn" href="https://youtu.be/Za5Tt6CSM2Q" target="_blank" rel="noopener">Voir la vidéo</a>
+          <a class="btn-ghost" href="index.html#mods">Section Mods</a>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Galerie -->
+    <section class="card pad" style="margin-bottom:var(--gap)">
+      <h2 style="margin:0 0 6px">Captures (WIP)</h2>
+      <p style="margin:0 0 12px; color:#9aa7bb">Level art, lighting, eau stylisée, grottes et verticalité.</p>
+      <div class="gallery">
+        <figure class="shot"><img src="sonic_01.jpg" alt="Overview — zone centrale et plan d’eau"></figure>
+        <figure class="shot"><img src="sonic_02.jpg" alt="Grande cascade et falaises"></figure>
+        <figure class="shot"><img src="sonic_03.jpg" alt="Grand anneau — zone d’arrivée / hub"></figure>
+        <figure class="shot"><img src="sonic_04.jpg" alt="Grottes — bassins souterrains et chutes"></figure>
+        <figure class="shot"><img src="sonic_05.jpg" alt="Vue aérienne — cheminements alternatifs"></figure>
+        <figure class="shot"><img src="sonic_06.jpg" alt="Galeries internes — plateformes et eau"></figure>
+        <figure class="shot"><img src="sonic_07.jpg" alt="Composition large — végétation low poly"></figure>
+        <figure class="shot"><img src="sonic_08.jpg" alt="Plan d’eau — reflets stylisés"></figure>
+      </div>
+    </section>
+
+    <!-- Détails techniques -->
+    <section class="grid" style="margin-bottom:var(--gap)">
+      <div class="card pad" style="grid-column: span 6">
+        <h3 style="margin-top:0">Tech stack</h3>
+        <ul style="margin:0; padding-left:18px">
+          <li>Unreal Engine 5 (Blueprints + volumes spline)</li>
+          <li>Assets stylisés maison + quelques proxies low poly</li>
+          <li>Material functions : herbe bicolore, roche damier, eau</li>
+          <li>Particules Niagara : chutes, embruns, bulles</li>
+          <li>Post-process custom : vignette + chroma split subtil</li>
+        </ul>
+      </div>
+      <div class="card pad" style="grid-column: span 6">
+        <h3 style="margin-top:0">Roadmap (si reprise)</h3>
+        <ul style="margin:0; padding-left:18px">
+          <li>Pass gameplay : timers, score et routes “A/B/S”</li>
+          <li>Boss arena courte + FX supplémentaires</li>
+          <li>Optim : HLOD + Nanite pour gros volumes</li>
+          <li>Portage controller manette + options caméra</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px">
+        <small style="color:#9aa7bb">© <span id="year"></span> Nicolas Krasnoholowy — Fan project, non-commercial.</small>
+        <a class="btn-ghost" href="index.html">← Retour au portfolio</a>
+      </div>
+    </footer>
+  </main>
+
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
