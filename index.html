@@ -14,7 +14,15 @@
       --radius:18px; --radius-sm:12px; --shadow:0 16px 44px rgba(0,0,0,.45);
       --gap:clamp(16px,2vw,28px); --container:max(72px, 4vw); --maxw:1280px;
       --z-bg:-2; --z-content:2; --z-walker:5; --z-egg:9999;
-    }
+    /* --- Démo Ymenok Reborn (portrait) --- */
+.demo-portrait .media {
+  aspect-ratio: 3/4;   /* Format vertical portrait */
+}
+
+.demo-portrait img {
+  object-fit: cover;
+  object-position: center;
+}
     *{box-sizing:border-box}
     html,body{height:100%}
     body{margin:0; font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial;
