@@ -42,6 +42,11 @@
       background:#ff2d55;
       color:#fff;
     }
+    .likebtn.disabled{
+      background:#2c2f3a;
+      color:var(--muted);
+      cursor:not-allowed;
+    }
     @keyframes pop {
       0%   { transform: scale(1); }
       50%  { transform: scale(1.4); }
@@ -190,7 +195,9 @@
         // Incrément avec protection localStorage + animation
         btn.addEventListener("click", async ()=>{
           if(localStorage.getItem("liked_"+post.id)){
-            count.textContent = count.textContent.replace("like(s)", "like(s) — déjà liké ✔");
+            btn.textContent = "✔ Déjà liké";
+            btn.classList.add("disabled");
+            btn.disabled = true;
             return;
           }
           try{
@@ -201,6 +208,9 @@
             localStorage.setItem("liked_"+post.id, "1");
             btn.classList.add("liked");
             setTimeout(()=> btn.classList.remove("liked"), 400);
+            btn.textContent = "✔ Déjà liké";
+            btn.classList.add("disabled");
+            btn.disabled = true;
           }catch(e){
             btn.disabled = true;
             count.textContent = "erreur de like";
