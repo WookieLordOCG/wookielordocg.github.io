@@ -5,10 +5,15 @@
   <title>Blog — Nico Krash</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
-    :root{
-      --bg:#0f0f12; --card:#15151a; --ink:#e9e9ef; --muted:#a6a8b3;
-      --accent:#8bf; --line:#24242b;
+    :root {
+      --bg: #050507;        /* fond plus profond */
+      --card: #101018;      /* cartes/panneaux plus sombres */
+      --ink: #e9e9ef;       /* texte principal */
+      --muted: #9a9cab;     /* texte secondaire */
+      --accent: #6ad0ff;    /* bleu clair un peu adouci */
+      --line: #1e2330;      /* bordures */
     }
+
     html,body{background:var(--bg); color:var(--ink); font-family:system-ui,Segoe UI,Inter,Arial,sans-serif; margin:0;}
     header{max-width:980px; margin:32px auto 0; padding:0 16px 8px; border-bottom:1px solid var(--line);}
     header h1{font-size:28px; margin:0 0 6px;}
@@ -22,8 +27,26 @@
     audio{width:100%; margin:10px 0}
     .content p{line-height:1.7; margin:10px 0}
     .likebar{display:flex; align-items:center; gap:10px; margin-top:12px}
-    .likebtn{background:#1f2330; border:1px solid var(--line); color:var(--ink); padding:8px 12px; border-radius:999px; cursor:pointer; font-weight:600}
-    .likebtn:active{transform:translateY(1px)}
+    .likebtn{
+      background:#1f2330;
+      border:1px solid var(--line);
+      color:var(--ink);
+      padding:8px 14px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:600;
+      transition: transform 0.15s ease-in-out;
+    }
+    .likebtn.liked{
+      animation: pop 0.4s ease;
+      background:#ff2d55;
+      color:#fff;
+    }
+    @keyframes pop {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.4); }
+      100% { transform: scale(1); }
+    }
     .count{color:var(--muted)}
     .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:10px}
     .sep{height:1px; background:var(--line); margin:24px 0}
@@ -53,33 +76,23 @@
   <script type="module">
     // =========================
     // === CONTENU : TES POSTS ICI ===
-    // Ajoute un objet par article. "date" est optionnelle : si tu l'omets, on met la date du jour.
-    // "html" accepte du HTML (paragraphes, <strong>, liens...). "images", "videos", "audio" sont des tableaux d'URL.
     const POSTS = [
       {
-        id: "premier-post",                // identifiant unique (slug). Sert pour le compteur de likes.
+        id: "premier-post",
         title: "Prototype Cassette — crash-site",
-        date: "2025-09-19",               // optionnel (format YYYY-MM-DD). Omet pour auto-date du jour.
+        date: "2025-09-19",
         html: `
           <p>Petit carnet de bord ✍️ Premier assemblage du crash-site, Pandamour observe les colonnes basaltiques.
           J'ai branché l'AGLS sur UE 5.6 et testé un brouillard volumétrique doux. Sentiment de monde fossile 💿🪨.</p>
-          <p>Feedback bienvenu. Et si vous aimez, un petit ❤️ aide à prioriser.</p>
         `,
-        images: [
-          "https://picsum.photos/seed/cassette/1200/700"
-        ],
-        videos: [
-          // "https://…/demo.mp4"
-        ],
-        audio: [
-          // "https://…/ambiance.mp3"
-        ],
+        images: ["https://picsum.photos/seed/cassette/1200/700"],
+        videos: [],
+        audio: [],
         tags: ["Cassette","UE5","Prototype"]
       },
       {
         id: "croquis-pandamour",
         title: "Croquis Pandamour + motif robe",
-        // pas de date -> date du jour auto
         html: `
           <p>Étude lumière douce, robe à carreaux bleus, Grochat passe la tête (évidemment).
           Style réaliste-stylisé, textures fourrure/tissu soignées.</p>
@@ -88,20 +101,19 @@
           "https://picsum.photos/seed/pandamour/1200/800",
           "https://picsum.photos/seed/grochat/1200/800"
         ],
-        audio: [],
         videos: [],
+        audio: [],
         tags: ["Pandamour","Croquis","Stylebook"]
       }
     ];
-    // === FIN CONTENU ===
     // =========================
 
-    // ------- helpers
+    // Helpers
     const $ = sel => document.querySelector(sel);
     const el = (tag, cls) => { const n=document.createElement(tag); if(cls) n.className=cls; return n; }
     const fmtDate = (d) => new Date(d).toLocaleDateString("fr-FR", { year:"numeric", month:"long", day:"numeric" });
 
-    // ------- Firebase (ta config)
+    // Firebase
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
     import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
 
@@ -119,7 +131,7 @@
     const appFB = initializeApp(firebaseConfig);
     const db = getDatabase(appFB);
 
-    // ------- rendu
+    // Rendu
     const mount = async () => {
       const wrap = $("#posts");
       if(!POSTS.length){
@@ -128,7 +140,6 @@
       }
 
       for(const post of POSTS){
-        // date auto si absente
         const dateISO = post.date || new Date().toISOString().slice(0,10);
 
         const card = el("article","post");
@@ -139,7 +150,7 @@
 
         const body = el("div","content"); body.innerHTML = post.html || "";
 
-        // médias
+        // Images
         if(post.images?.length){
           const g = el("div","media grid");
           post.images.forEach(src=>{
@@ -148,12 +159,14 @@
           });
           body.appendChild(g);
         }
+        // Vidéos
         if(post.videos?.length){
           post.videos.forEach(src=>{
             const v = el("video","media"); v.controls = true; v.src = src;
             body.appendChild(v);
           });
         }
+        // Audio
         if(post.audio?.length){
           post.audio.forEach(src=>{
             const a = el("audio"); a.controls = true; a.src = src;
@@ -161,26 +174,33 @@
           });
         }
 
-        // like
+        // Like
         const likeBar = el("div","likebar");
         const btn = el("button","likebtn"); btn.textContent = "❤️ J’aime";
         const count = el("span","count"); count.textContent = "…";
         likeBar.append(btn, count);
 
-        // lecture compteur
+        // Lecture compteur
         const path = `likes/${post.id}`;
         try{
           const snap = await get(ref(db, path));
           count.textContent = (snap.exists()? snap.val() : 0) + " like(s)";
         }catch(e){ count.textContent = "0 like(s)"; }
 
-        // incrément
+        // Incrément avec protection localStorage + animation
         btn.addEventListener("click", async ()=>{
+          if(localStorage.getItem("liked_"+post.id)){
+            count.textContent = count.textContent.replace("like(s)", "like(s) — déjà liké ✔");
+            return;
+          }
           try{
             const snap = await get(ref(db, path));
             const cur = snap.exists()? snap.val() : 0;
             await set(ref(db, path), cur + 1);
             count.textContent = (cur+1) + " like(s)";
+            localStorage.setItem("liked_"+post.id, "1");
+            btn.classList.add("liked");
+            setTimeout(()=> btn.classList.remove("liked"), 400);
           }catch(e){
             btn.disabled = true;
             count.textContent = "erreur de like";
