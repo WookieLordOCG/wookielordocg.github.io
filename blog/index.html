@@ -1,64 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Blog — Nico Krash</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    :root {
+      --bg:#0b0e13;
+      --card:#121722;
+      --ink:#e8edf5;
+      --muted:#9aa7bb;
+      --accent:#86c5ff;
+      --accent2:#5ee1c0;
+      --line:rgba(255,255,255,.06);
+    }
+    html,body{background:var(--bg); color:var(--ink); font-family:system-ui,Segoe UI,Inter,Arial,sans-serif; margin:0;}
+    header{max-width:980px; margin:32px auto 0; padding:0 16px 12px; border-bottom:1px solid var(--line);}
+    header h1{font-size:28px; margin:0 0 6px;}
+    header p{margin:0 0 14px; color:var(--muted)}
+    main{max-width:980px; margin:0 auto; padding:16px;}
+    .post{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:22px; margin:24px 0; box-shadow:0 6px 22px rgba(0,0,0,.35);}
+    .post h2{margin:0 0 6px; font-size:24px; line-height:1.3}
+    .meta{color:var(--muted); font-size:14px; margin-bottom:14px}
+    .media{margin:14px 0}
+    .media img{max-width:100%; display:block; border-radius:12px; margin:12px 0; outline:1px solid var(--line)}
+    .content p{line-height:1.7; margin:12px 0}
+    .likebar{display:flex; align-items:center; gap:10px; margin-top:16px}
+    .likebtn{
+      background:#1f2330;
+      border:1px solid var(--line);
+      color:var(--ink);
+      padding:8px 14px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:600;
+      transition: transform 0.15s ease-in-out;
+    }
+    .likebtn.liked{
+      animation: pop 0.4s ease;
+      background:#ff2d55;
+      color:#fff;
+    }
+    .likebtn.disabled{
+      background:#2c2f3a;
+      color:var(--muted);
+      cursor:not-allowed;
+    }
+    @keyframes pop {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.4); }
+      100% { transform: scale(1); }
+    }
+    .count{color:var(--muted)}
+    a{color:var(--accent); text-decoration:none} a:hover{text-decoration:underline}
+    footer{max-width:980px; margin:24px auto 40px; padding:0 16px; color:var(--muted)}
+    .badge{display:inline-block; background:#1b1d26; border:1px solid var(--line); padding:3px 8px; border-radius:999px; margin-right:6px}
+    .empty{color:var(--muted); text-align:center; padding:40px 0}
+  </style>
+</head>
 <body>
   <header>
-    <!-- ... ton header/navigation identiques ... -->
+    <h1>Blog — Nico Krash</h1>
+    <p>Carnet de bord créatif : explorations, récits et projets personnels.</p>
   </header>
 
-  <main>
-    <!-- ... toutes tes sections identiques (hero, projets, vidéos, archives, contact, etc.) ... -->
-
-    <footer class="container">
-      <small>© <span id="year"></span> Nicolas Krasnoholowy — Portfolio</small>
+  <main id="app">
+    <div id="posts"></div>
+    <footer>
+      <span class="badge">Statique</span>
+      <span class="badge">Firebase Likes</span>
+      <span class="badge">HTML fait main</span>
     </footer>
   </main>
 
-  <!-- Plus de <canvas>, ni #walker -->
-  <!-- Plus de secret icon -->
+  <script type="module">
+    // === ARTICLES DU BLOG ===
+    const POSTS = [
+      {
+        id: "ymenok-reborn-parcours",
+        title: "Création d’un carnet de bord — revenir sur mon parcours",
+        date: "2025-09-20",
+        html: `
+          <p>Afin de tenir un journal de mes créations, j’ai eu envie de créer et d’entretenir un blog. Plus qu’un simple site, je souhaite en faire un carnet de bord créatif, où je pourrai partager mes expériences, mes projets, mes réussites et mes erreurs.</p>
 
-  <script>
-    // Juste l’année
-    document.getElementById('year').textContent = new Date().getFullYear();
+          <p>Mon parcours a commencé avec un <strong>Bac STI Arts Appliqués</strong>, puis très vite je me suis tourné vers la 3D, découvrant des logiciels comme <em>3ds Max</em> ou <em>ZBrush</em>. Après une année préparatoire à <strong>LISAA</strong>, j’ai poursuivi par quatre années d’école en ligne, afin de consolider mes acquis techniques dans différents outils numériques.</p>
 
-    // Révélation progressive des sections
-    const io = new IntersectionObserver((entries)=>{
-      for(const e of entries){
-        if(e.isIntersecting){
-          e.target.classList.add('is-visible');
-          io.unobserve(e.target);
+          <p>Avec des amis rencontrés durant cette année de prépa, nous avons décidé de lancer un premier grand projet : un <strong>FPS sur Unreal Engine</strong>. Nous étions trois graphistes de formation, sans véritable programmeur dans l’équipe. Cela nous a confrontés à de nombreux défis : l’intégration d’assets, la création de boucles de gameplay, la conception de code et de blueprints, l’animation, l’intégration d’ennemis, le feedback des armes et tous les mécanismes nécessaires à un jeu jouable.</p>
+
+          <p>Malgré ces difficultés, ce projet fut une formidable aventure. Nous avons tenté de le présenter dans un maximum de salons : <strong>Japan Expo</strong>, <strong>Gamers Assembly</strong>, et même la <strong>Paris Games Week</strong>, où nous avons eu l’opportunité de confronter notre jeu à un vrai public et de rencontrer des professionnels (éditeurs, studios). Ces échanges nous ont énormément appris.</p>
+
+          <p>Mais au fil du temps, entre la disponibilité de chacun, le manque de ressources et la difficulté à maintenir la motivation, le projet s’est essoufflé. Finalement, nous avons décidé de l’abandonner, et j’ai quitté la structure que j’avais co-créée. Cela m’a pris près de deux ans pour m’en remettre, digérer cet échec et retrouver l’envie de créer.</p>
+
+          <p>Aujourd’hui, avec plus de recul, je choisis de reprendre la plume et la souris pour avancer. Ce blog sera mon <strong>carnet de bord créatif</strong>, un espace où je partagerai mes explorations, mes recherches et mes futurs projets — avec sincérité, curiosité et passion.</p>
+
+          <p style="text-align:center; margin-top:20px;">
+            <a href="https://archive.org/details/ymenok-reborn-2016-2020" target="_blank" 
+              style="display:inline-block; background:#86c5ff; color:#050507; font-weight:bold; padding:12px 20px; border-radius:8px; text-decoration:none; transition:0.2s;">
+              ⬇ Télécharger Ymenok Reborn (2016–2020)
+            </a>
+          </p>
+        `,
+        images: ["../nico-1000037423.jpg"],
+        videos: [],
+        audio: [],
+        tags: ["Parcours","Ymenok","Unreal Engine","Blog"]
+      }
+    ];
+
+    // Helpers
+    const $ = sel => document.querySelector(sel);
+    const el = (tag, cls) => { const n=document.createElement(tag); if(cls) n.className=cls; return n; }
+    const fmtDate = (d) => new Date(d).toLocaleDateString("fr-FR", { year:"numeric", month:"long", day:"numeric" });
+
+    // Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+    import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAqvDveF6fCyBzGu0LbRO7qL6jkl9GDydU",
+      authDomain: "blog-nico--krash.firebaseapp.com",
+      databaseURL: "https://blog-nico--krash-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "blog-nico--krash",
+      storageBucket: "blog-nico--krash.firebasestorage.app",
+      messagingSenderId: "404335649602",
+      appId: "1:404335649602:web:4e89e1758c0741f9bddedb",
+      measurementId: "G-YFE1LQHJV9"
+    };
+
+    const appFB = initializeApp(firebaseConfig);
+    const db = getDatabase(appFB);
+
+    // Rendu
+    const mount = async () => {
+      const wrap = $("#posts");
+      if(!POSTS.length){
+        const empty = el("div","empty"); empty.textContent = "Aucun article pour l’instant.";
+        wrap.appendChild(empty); return;
+      }
+
+      for(const post of POSTS){
+        const dateISO = post.date || new Date().toISOString().slice(0,10);
+
+        const card = el("article","post");
+        const h2 = el("h2"); h2.textContent = post.title;
+        const meta = el("div","meta");
+        const tgs = (post.tags && post.tags.length) ? ` · <span>${post.tags.map(t=>`#${t}`).join(" ")}</span>` : "";
+        meta.innerHTML = `<span>${fmtDate(dateISO)}</span>${tgs}`;
+
+        const body = el("div","content"); body.innerHTML = post.html || "";
+
+        if(post.images?.length){
+          const g = el("div","media");
+          post.images.forEach(src=>{
+            const im = el("img"); im.loading="lazy"; im.src = src; im.alt = post.title;
+            g.appendChild(im);
+          });
+          body.appendChild(g);
         }
-      }
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-    // ---- Onglets CV + auto-height iframe ----
-    (function(){
-      const frBtn = document.getElementById('cv_fr_btn');
-      const enBtn = document.getElementById('cv_en_btn');
-      const frame = document.getElementById('cvFrame');
+        const likeBar = el("div","likebar");
+        const btn = el("button","likebtn"); btn.textContent = "❤️ J’aime";
+        const count = el("span","count"); count.textContent = "…";
+        likeBar.append(btn, count);
 
-      function setLang(lang){
-        const src = (lang === 'en') ? 'cv_en_black.html' : 'cv_fr_black.html';
-        frame.src = src;
-        frBtn.classList.toggle('active', lang!=='en');
-        enBtn.classList.toggle('active', lang==='en');
-        frBtn.setAttribute('aria-selected', lang!=='en');
-        enBtn.setAttribute('aria-selected', lang==='en');
-      }
-      frBtn?.addEventListener('click', ()=>setLang('fr'));
-      enBtn?.addEventListener('click', ()=>setLang('en'));
-
-      function fitIframe(){
+        const path = `likes/${post.id}`;
         try{
-          const d = frame.contentWindow.document;
-          const h = Math.max(
-            d.body.scrollHeight,
-            d.documentElement.scrollHeight,
-            1000
-          );
-          frame.style.height = (h + 20) + 'px';
-        }catch(e){}
+          const snap = await get(ref(db, path));
+          count.textContent = (snap.exists()? snap.val() : 0) + " like(s)";
+        }catch(e){ count.textContent = "0 like(s)"; }
+
+        btn.addEventListener("click", async ()=>{
+          if(localStorage.getItem("liked_"+post.id)){
+            btn.textContent = "✔ Déjà liké";
+            btn.classList.add("disabled");
+            btn.disabled = true;
+            return;
+          }
+          try{
+            const snap = await get(ref(db, path));
+            const cur = snap.exists()? snap.val() : 0;
+            await set(ref(db, path), cur + 1);
+            count.textContent = (cur+1) + " like(s)";
+            localStorage.setItem("liked_"+post.id, "1");
+            btn.classList.add("liked");
+            setTimeout(()=> btn.classList.remove("liked"), 400);
+            btn.textContent = "✔ Déjà liké";
+            btn.classList.add("disabled");
+            btn.disabled = true;
+          }catch(e){
+            btn.disabled = true;
+            count.textContent = "erreur de like";
+          }
+        });
+
+        card.append(h2, meta, body, likeBar);
+        wrap.appendChild(card);
       }
-      frame.addEventListener('load', fitIframe);
-      window.addEventListener('resize', ()=>setTimeout(fitIframe, 150));
-    })();
+    };
+
+    mount();
   </script>
 </body>
+</html>
