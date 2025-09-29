@@ -40,6 +40,16 @@
       box-shadow:0 6px 22px rgba(0,0,0,.35);
     }
     .back-btn:hover{opacity:.9}
+
+    /* Bouton style "téléchargement" réutilisable */
+    .cta { text-align:center; margin-top:20px; }
+    .cta-btn{
+      display:inline-block; background:#86c5ff; color:#050507;
+      font-weight:bold; padding:12px 20px; border-radius:8px;
+      text-decoration:none;
+      box-shadow:0 6px 22px rgba(0,0,0,.35);
+    }
+    .cta-btn:hover{ opacity:.9; }
   </style>
 </head>
 <body>
@@ -75,11 +85,14 @@
 
         <p>L’idée est de <strong>concevoir la majorité des assets de manière classique</strong>. À l’exception de certaines roches — déjà disponibles et exploitables — je réaliserai la <strong>végétation</strong> ainsi que certains <strong>FX/particules</strong> sous <strong>Quill en VR</strong>, puis j’importerai le tout dans Unreal.</p>
 
-        <p>Le <strong>breakdown</strong> de la création du personnage principal est ici :<br>
-          <a href="https://gamma.app/docs/Breakdown-Creation-du-Scaphandrier-CRT-ls3j6a668i2nt49" target="_blank" rel="noopener">
-            Breakdown — Scaphandrier CRT
+        <!-- Bouton Breakdown centré -->
+        <div class="cta">
+          <a class="cta-btn"
+             href="https://gamma.app/docs/Breakdown-Creation-du-Scaphandrier-CRT-ls3j6a668i2nt49"
+             target="_blank" rel="noopener">
+             📄 Breakdown — Scaphandrier CRT
           </a>
-        </p>
+        </div>
       </div>
 
       <div class="likebar">
