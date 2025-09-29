@@ -49,8 +49,47 @@
   </header>
 
   <main>
-    <!-- ARTICLE #1 -->
-    <article class="post" data-post-id="ymenok-reborn-parcours">
+    <!-- ARTICLE Cassette (2025-09-29) -->
+    <article class="post" data-post-id="cassette-intro" data-date="2025-09-29">
+      <h2>Cassette — Présentation &amp; démarrage</h2>
+      <div class="meta">29 septembre 2025 · #Cassette #UE5 #SoloDev</div>
+
+      <div class="media">
+        <img src="CassetteLogo.png" alt="Cassette — logo">
+      </div>
+
+      <div class="content">
+        <p><em>Un scaphandrier au casque CRT, des paysages basaltiques, et des souvenirs qui se rembobinent. Cassette démarre — en solo.</em></p>
+
+        <p>Après avoir pris plusieurs mois pour trouver un univers et une histoire qui me plaisent, je me lance dans <strong>Cassette</strong>, mon nouveau projet personnel. Je le développe pour le moment <strong>seul</strong>. J’y tiendrai un <strong>journal de bord court et régulier</strong> : un espace où je pose les intentions, l’univers et la matière visuelle, tout en gardant le cœur des mécaniques sous silence pour préserver la découverte.</p>
+
+        <p>Le prototype tourne sous <strong>Unreal Engine 5.6</strong> (Nanite/Lumen). Je travaille les formes sous <strong>Blender/ZBrush</strong>, les textures avec la <strong>suite Substance</strong>.</p>
+
+        <h3>Plugins utilisés</h3>
+        <ul>
+          <li><strong>Adventure Game Locomotion System</strong> (Jakub W.) — système de locomotion adapté au prototypage et perfectionnable par la suite.</li>
+          <li><strong>Errant World</strong> — conception de biomes pour des environnements procéduraux semi-ouverts.</li>
+          <li><strong>Dash</strong> — surface scattering et world building.</li>
+          <li><strong>Easy Rain / Easy Snow</strong> — détails d’environnement (pluie, neige).</li>
+        </ul>
+
+        <p>L’idée est de <strong>concevoir la majorité des assets de manière classique</strong>. À l’exception de certaines roches — déjà disponibles et exploitables — je réaliserai la <strong>végétation</strong> ainsi que certains <strong>FX/particules</strong> sous <strong>Quill en VR</strong>, puis j’importerai le tout dans Unreal.</p>
+
+        <p>Le <strong>breakdown</strong> de la création du personnage principal est ici :<br>
+          <a href="https://gamma.app/docs/Breakdown-Creation-du-Scaphandrier-CRT-ls3j6a668i2nt49" target="_blank" rel="noopener">
+            Breakdown — Scaphandrier CRT
+          </a>
+        </p>
+      </div>
+
+      <div class="likebar">
+        <button class="likebtn">❤️ J’aime</button>
+        <span class="count">…</span>
+      </div>
+    </article>
+
+    <!-- ARTICLE Parcours (2025-09-20) -->
+    <article class="post" data-post-id="ymenok-reborn-parcours" data-date="2025-09-20">
       <h2>Création d’un carnet de bord — revenir sur mon parcours</h2>
       <div class="meta">20 septembre 2025 · #Parcours #Ymenok #Unreal Engine #Blog</div>
 
@@ -90,8 +129,17 @@
     </footer>
   </main>
 
-  <!-- JS : compteur de likes -->
+  <!-- JS : tri des articles + compteur de likes -->
   <script type="module">
+    // --- Tri des articles (du plus récent au plus ancien) ---
+    const main = document.querySelector('main');
+    const footer = main.querySelector('footer');
+    const posts = Array.from(main.querySelectorAll('.post'));
+    posts
+      .sort((a, b) => (b.dataset.date || '').localeCompare(a.dataset.date || ''))
+      .forEach(p => main.insertBefore(p, footer));
+
+    // --- Firebase Likes ---
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
     import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
 
@@ -109,7 +157,8 @@
     const app = initializeApp(firebaseConfig);
     const db  = getDatabase(app);
 
-    document.querySelectorAll('.post').forEach(async (card)=>{
+    // Après tri, on relit les posts et on attache les like-buttons
+    main.querySelectorAll('.post').forEach(async (card)=>{
       const id = card.getAttribute('data-post-id');
       const btn = card.querySelector('.likebtn');
       const count = card.querySelector('.count');
@@ -118,7 +167,9 @@
       try{
         const snap = await get(ref(db, path));
         count.textContent = (snap.exists()? snap.val() : 0) + " like(s)";
-      }catch{ count.textContent = "0 like(s)"; }
+      }catch{
+        count.textContent = "0 like(s)";
+      }
 
       if(localStorage.getItem("liked_"+id)){
         btn.textContent = "✔ Déjà liké";
@@ -137,7 +188,8 @@
           btn.classList.add("liked");
           setTimeout(()=>btn.classList.remove("liked"), 400);
           btn.textContent = "✔ Déjà liké";
-          btn.classList.add("disabled"); btn.disabled = true;
+          btn.classList.add("disabled");
+          btn.disabled = true;
         }catch{
           btn.disabled = true;
           count.textContent = "erreur de like";
