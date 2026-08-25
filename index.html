@@ -297,9 +297,9 @@
             <div class="bento-card glass-solid">
               <div class="bento-card-label" data-i18n="about-cv-label">CV &amp; Portfolio</div>
               <div class="cv-btns">
-                <a class="btn-ghost" href="cv_fr_black.html" target="_blank" rel="noopener" data-i18n="about-cv-btn-fr">📄 CV Français (HTML)</a>
-                <a class="btn-ghost" href="cv_en_black.html" target="_blank" rel="noopener" data-i18n="about-cv-btn-en">📄 Resume English (HTML)</a>
-                <a class="btn-ghost" href="CV_FR_dark_compact_banner_SMALL_projects_UPDATED.pdf" target="_blank" rel="noopener" data-i18n="about-cv-btn-pdf">📋 Télécharger PDF</a>
+                <a class="btn-ghost" href="cv.html?lang=fr" target="_blank" rel="noopener" data-i18n="about-cv-btn-fr">📄 CV Français (HTML)</a>
+                <a class="btn-ghost" href="cv.html?lang=en" target="_blank" rel="noopener" data-i18n="about-cv-btn-en">📄 Resume English (HTML)</a>
+                <a id="about_pdf_btn" class="btn-ghost" href="CV_Nicolas_Krasnoholowy_FR_2026.pdf" target="_blank" rel="noopener" data-i18n="about-cv-btn-pdf">📋 Télécharger PDF</a>
               </div>
             </div>
             <div class="bento-card glass-solid">
@@ -395,10 +395,6 @@
             <div class="proj-media"><img src="diorama.png" alt="Diorama enneigé" loading="lazy" decoding="async"/></div>
             <div class="proj-info"><div class="proj-tags"><span class="tag">Shaders</span><span class="tag">Matériaux</span></div><div class="proj-title" data-i18n="proj-diorama-title">Diorama Enneigé</div><div class="proj-desc" data-i18n="proj-diorama-desc">Neige stylisée, storytelling environnemental.</div></div>
           </a>
-          <a class="proj-card" data-tags="ui unreal" href="https://gamma.app/docs/Crown-Of-Hispania-n7b964nkllbi9gf?mode=doc" target="_blank" rel="noopener noreferrer">
-            <div class="proj-media"><img src="strategie.png" alt="Crown of Hispania" loading="lazy" decoding="async"/></div>
-            <div class="proj-info"><div class="proj-tags"><span class="tag">UI</span><span class="tag" data-i18n="tag-systems">Systèmes</span></div><div class="proj-title" data-i18n="proj-hispania-title">Crown of Hispania</div><div class="proj-desc" data-i18n="proj-hispania-desc">Prototype stratégie — wireframes + UI.</div></div>
-          </a>
           <a class="proj-card" data-tags="unreal" href="https://owlcastlegames.itch.io/ymenok-reborn" target="_blank" rel="noopener noreferrer">
             <div class="proj-media"><img src="Ymenok.png" alt="Ymenok Reborn" loading="lazy" decoding="async"/></div>
             <div class="proj-info"><div class="proj-tags"><span class="tag">Unreal</span><span class="tag" data-i18n="tag-gameplay">Gameplay</span></div><div class="proj-title" data-i18n="proj-ymenok-title">Ymenok Reborn</div><div class="proj-desc" data-i18n="proj-ymenok-desc">FPS narratif — prototypage, level art.</div></div>
@@ -479,12 +475,12 @@
               <button id="cv_fr_btn" class="lang-tab active" role="tab" aria-selected="true" type="button">FR</button>
               <button id="cv_en_btn" class="lang-tab" role="tab" aria-selected="false" type="button">EN</button>
             </div>
-            <a class="btn-ghost" href="cv_fr_black.html" target="_blank" rel="noopener" style="font-size:0.8rem; padding:8px 14px;" data-i18n="cv-open-fr">Ouvrir FR</a>
-            <a class="btn-ghost" href="cv_en_black.html" target="_blank" rel="noopener" style="font-size:0.8rem; padding:8px 14px;" data-i18n="cv-open-en">Ouvrir EN</a>
+            <a class="btn-ghost" href="cv.html?lang=fr" target="_blank" rel="noopener" style="font-size:0.8rem; padding:8px 14px;" data-i18n="cv-open-fr">Ouvrir FR</a>
+            <a class="btn-ghost" href="cv.html?lang=en" target="_blank" rel="noopener" style="font-size:0.8rem; padding:8px 14px;" data-i18n="cv-open-en">Ouvrir EN</a>
           </div>
           <small style="color:var(--muted); font-size:0.78rem;" data-i18n="cv-note">Les pages HTML contiennent la version complète (outils, formations, langues…).</small>
         </div>
-        <iframe id="cvFrame" class="cv-frame reveal" src="cv_fr_black.html" title="CV de Nicolas Krasnoholowy" loading="lazy"></iframe>
+        <iframe id="cvFrame" class="cv-frame reveal" src="cv.html?lang=fr" title="CV de Nicolas Krasnoholowy" loading="lazy"></iframe>
       </div>
     </section>
 
@@ -529,7 +525,7 @@
           <div class="glass-solid" style="border-radius:var(--radius); padding:28px; display:flex; flex-direction:column; justify-content:center; gap:14px;">
             <div class="bento-card-label" data-i18n="arch-pdf-label">CV PDF</div>
             <p style="color:var(--muted); font-size:0.88rem; margin-bottom:6px;" data-i18n="arch-pdf-note">Version PDF compact, prêt à l'envoi.</p>
-            <a class="btn-primary" href="CV_FR_dark_compact_banner_SMALL_projects_UPDATED.pdf" target="_blank" rel="noopener noreferrer" style="align-self:flex-start;" data-i18n="arch-pdf-btn">📄 Télécharger le CV</a>
+            <a id="archive_pdf_btn" class="btn-primary" href="CV_Nicolas_Krasnoholowy_FR_2026.pdf" target="_blank" rel="noopener noreferrer" style="align-self:flex-start;" data-i18n="arch-pdf-btn">📄 Télécharger le CV</a>
           </div>
         </div>
       </div>
@@ -599,7 +595,6 @@
       'proj-cassette-char-title':'Cassette — Breakdown Personnage','proj-cassette-char-desc':'Silhouette, lisibilité, matériaux.',
       'proj-pdvi-title':'Point de vue immersif','proj-pdvi-desc':'Étude DA, cadrage & atmosphères.',
       'proj-diorama-title':'Diorama Enneigé','proj-diorama-desc':'Neige stylisée, storytelling environnemental.',
-      'proj-hispania-title':'Crown of Hispania','proj-hispania-desc':'Prototype stratégie — wireframes + UI.',
       'proj-ymenok-title':'Ymenok Reborn','proj-ymenok-desc':'FPS narratif — prototypage, level art.',
       'proj-relic-title':'Relic Rumble','proj-relic-desc':'Run & gun — en cours.',
       'proj-panda-title':'Pandamour','proj-panda-desc':'Livre illustré — réalisme stylisé.',
@@ -653,7 +648,6 @@
       'proj-cassette-char-title':'Cassette — Character Breakdown','proj-cassette-char-desc':'Silhouette, readability, materials.',
       'proj-pdvi-title':'Immersive Viewpoint','proj-pdvi-desc':'Art direction study, framing & atmospheres.',
       'proj-diorama-title':'Snow Diorama','proj-diorama-desc':'Stylized snow, environmental storytelling.',
-      'proj-hispania-title':'Crown of Hispania','proj-hispania-desc':'Strategy prototype — wireframes + UI.',
       'proj-ymenok-title':'Ymenok Reborn','proj-ymenok-desc':'Narrative FPS — prototyping, level art.',
       'proj-relic-title':'Relic Rumble','proj-relic-desc':'Run & gun — work in progress.',
       'proj-panda-title':'Pandamour','proj-panda-desc':'Illustrated book — stylized realism.',
@@ -740,6 +734,11 @@
       btn.classList.toggle('active', on);
       btn.setAttribute('aria-pressed', String(on));
     });
+    const pdfHref = lang === 'en' ? 'CV_Nicolas_Krasnoholowy_EN_2026.pdf' : 'CV_Nicolas_Krasnoholowy_FR_2026.pdf';
+    const aboutPdf = document.getElementById('about_pdf_btn');
+    const archivePdf = document.getElementById('archive_pdf_btn');
+    if (aboutPdf) aboutPdf.href = pdfHref;
+    if (archivePdf) archivePdf.href = pdfHref;
     typingRestart();
   }
 
@@ -818,7 +817,7 @@
   (function () {
     const frB = document.getElementById('cv_fr_btn'), enB = document.getElementById('cv_en_btn'), fr = document.getElementById('cvFrame');
     function setCv(lang) {
-      fr.src = lang==='en' ? 'cv_en_black.html' : 'cv_fr_black.html';
+      fr.src = lang==='en' ? 'cv.html?lang=en' : 'cv.html?lang=fr';
       frB.classList.toggle('active', lang!=='en'); enB.classList.toggle('active', lang==='en');
       frB.setAttribute('aria-selected', String(lang!=='en')); enB.setAttribute('aria-selected', String(lang==='en'));
     }
